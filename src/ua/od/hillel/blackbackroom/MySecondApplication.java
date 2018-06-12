@@ -20,6 +20,7 @@ public class MySecondApplication {
 
         }
         System.out.println(s2);
+        
     }
 
 }
