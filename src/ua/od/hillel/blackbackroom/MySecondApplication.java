@@ -32,8 +32,8 @@ public class MySecondApplication {
 
     public void rnd(int u,int o){
 
-        int random_nmbr=(int)(Math.random()*(o-u)+u);
-        System.out.println("\nСлучайное число от "+u+" до "+o+" : "+random_nmbr);
+        int random_n=(int)(Math.random()*(o-u)+u);
+        System.out.println("\nСлучайное число от "+u+" до "+o+" : "+random_n);
 
     }
 
