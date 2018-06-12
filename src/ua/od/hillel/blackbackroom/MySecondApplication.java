@@ -33,7 +33,7 @@ public class MySecondApplication {
     void rnd(int u,int o){
 
         int random_n;
-        random_n = (int)(Math.random()*(o-u)+u);
+        random_n = (int)(Math. random()*(o-u)+u);
         System.out.println("\nСлучайное число от "+u+" до "+o+" : "+random_n);
 
     }
