@@ -20,11 +20,11 @@ public class MySecondApplication {
         System.out.println("task 2");
         String str1 = "1lesson1lesson1lesson";
         String str2 = str1.replace("1", "2");
-<<<<<<< HEAD
+
         System.out.println("Substitution from 1 to 2: " + str2);
-=======
+
         System.out.println("Substitution of 1 to 2: " + str2);
->>>>>>> origin/lesson2_Valkoiset
+
 
         StringBuffer str3 = new StringBuffer(str2);
 
