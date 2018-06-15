@@ -14,6 +14,25 @@ public class lesson3 {
         }
         //Вывод на экран результата
         System.out.println("Факториал "+end+" равен: "+fact);
+
+
+
+        System.out.println("Введите количество чисел Фибоначчи для вывода:");
+        //Сканируем количесство чисел для вывода
+        int i=scanner.nextInt();
+        //Создаём массив Фибоначчи
+        int[] fibonachi=new int[i];
+        //Указываем первые два значение массива
+        fibonachi[0]=0;
+        fibonachi[1]=1;
+        System.out.print("Ряд Фибоначчи для первых "+i+" элементов: "+fibonachi[0]+" "+fibonachi[1]+" ");
+        //Через цикл выводим
+        for( i=2;i<fibonachi.length;i++){
+            fibonachi[i]=fibonachi[i-1]+fibonachi[i-2];
+            System.out.print(fibonachi[i]+" ");
+        }
+
     }
-    
+
+
 }
