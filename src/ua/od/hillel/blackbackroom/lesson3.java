@@ -6,7 +6,7 @@ public class lesson3 {
         System.out.println("Введите значение факториала");
         Scanner scanner=new Scanner(System.in);
         int end=scanner.nextInt();
-        //Начальное значение факториала
+        //Начальное значение факториала fibonaci
         int fact=1;
         //Цикл для расчёта факториала
         for(int i=1;i<end;i++){
