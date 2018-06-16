@@ -22,7 +22,7 @@ public class lesson3 {
         int i=scanner.nextInt();
         //Создаём массив Фибоначчи
         int[] fibonachi=new int[i];
-        //Указываем первые два значение массива
+        //Указываем первые два значение массива fibonacchi
         fibonachi[0]=0;
         fibonachi[1]=1;
         System.out.print("Ряд Фибоначчи для первых "+i+" элементов: "+fibonachi[0]+" "+fibonachi[1]+" ");
