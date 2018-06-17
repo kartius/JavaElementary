@@ -13,7 +13,7 @@ public class MySecondApplication {
         String s1=s.replace("1","2");
         System.out.println("Результат: "+s1);
 
-        StringBuffer s2= new StringBuffer(s1);
+        StringBuilder s2= new StringBuilder(s1);
         for(int i=0;i<s1.length();i++){
             i=s2.indexOf("n",i);
             s2.insert(i+1," ");
