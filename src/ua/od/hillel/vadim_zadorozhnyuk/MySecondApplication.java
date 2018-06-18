@@ -26,6 +26,38 @@ public class MySecondApplication {
         int digit = (int)(Math.random()*(to-from)+from);
 
         System.out.println(digit);
+
+        //task Factorial
+        int number = 5;
+        System.out.println("factorial " + number + " = " + factorial(number));
+
+        //task Fibonacci
+        int rowlength = 10;
+        int first = 0;
+        int second = 1;
+        String fibo = first + ", " + second;
+        int sum;
+
+        for (int i = 2; i < rowlength; i++) {
+            sum = first + second;
+            first = second;
+            second = sum;
+            fibo+=", "+sum;
+
+        }
+        System.out.println(fibo);
+
+
+    }
+    static int factorial(int digit){
+        int result;
+        if (digit==1){
+            return digit;
+        }else{
+            result = factorial(digit-1)*digit;
+            return result;
+        }
+
     }
 
 }
