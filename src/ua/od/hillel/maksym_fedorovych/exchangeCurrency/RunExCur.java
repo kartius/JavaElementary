@@ -12,5 +12,7 @@ public class RunExCur {
 
 
      ExCur.change(1,isocode, 978);
+
+     //фівіві
     }
 }
