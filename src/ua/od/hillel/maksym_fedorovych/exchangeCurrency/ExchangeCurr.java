@@ -16,7 +16,7 @@ public class ExchangeCurr {
         arriso[2] = 978; /*EUR*/
 
 
-        System.out.println("HelloTestApp");
+       // System.out.println("HelloTestApp");
     }
     public void change (double Amount, int isocode, int isocodeNew){
         boolean bNotFound = true;

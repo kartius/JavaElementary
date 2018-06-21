@@ -6,12 +6,19 @@ public class RunExCur {
     public static void main(String[] args) {
      ExchangeCurr ExCur = new ExchangeCurr();
        int isocode;
+       int isocodeNew;
+       double Amount;
+       Scanner scaner = new Scanner(System.in);
 
-        Scanner scaner = new Scanner(System.in);
-        isocode = scaner.nextInt();
+       System.out.println("Введите первичную валюту: ");
+       isocode = scaner.nextInt();
+       System.out.println("Введите валюту в которую необходимо проконвертировать сумму: ");
+       isocodeNew = scaner.nextInt();
 
+        System.out.println("Введите сумму: ");
+        Amount = scaner.nextDouble();
 
-     ExCur.change(1,isocode, 978);
+     ExCur.change(Amount,isocode, isocodeNew);
 
      //фівіві
     }
