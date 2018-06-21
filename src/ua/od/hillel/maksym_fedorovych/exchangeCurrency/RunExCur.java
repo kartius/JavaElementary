@@ -17,7 +17,7 @@ public class RunExCur {
 
         System.out.println("Введите сумму: ");
         Amount = scaner.nextDouble();
-
+//test
      ExCur.change(Amount,isocode, isocodeNew);
 
      //фівіві
