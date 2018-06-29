@@ -1,4 +1,4 @@
-package ua.od.hillel;
+package ua.od.hillel.maksym_fedorovych;
 
 
 
@@ -34,6 +34,9 @@ public class ThirdTask {
           System.out.println("Случайное значение не спроецированное на интервал: " + drandom);
           System.out.println("Случайный процент: " + percentValue);
           System.out.println("Случайное значение: " + res);
+
+
+
 
    }
 }
