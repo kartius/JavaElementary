@@ -1,6 +1,6 @@
-package nick_tsyb.lesson4;
+package ua.od.hillel.nick_tsyb.lesson4;
 
-import nick_tsyb.lesson4.application.Calculator;
+import ua.od.hillel.nick_tsyb.lesson4.application.Calculator;
 
 public class TestGS {
 

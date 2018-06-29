@@ -1,11 +1,11 @@
-package nick_tsyb.lesson4.application;
+package ua.od.hillel.nick_tsyb.lesson4.application;
 
 public class Calculator {
 
 
     public Calculator(String str) {
 
-//        System.out.println("HEllo " + str);
+        System.out.println("Hello " + str);
 
     }
 
@@ -18,13 +18,8 @@ public class Calculator {
 
             if (c == operator) {
                 internalCalculate(first, second, operator);
-            } else {
-                System.out.println("Incorrect operator " + operator);
-                break;
             }
-
         }
-
 
     }
 

@@ -1,4 +1,4 @@
-package nick_tsyb.lesson4;
+package ua.od.hillel.nick_tsyb.lesson4;
 
 public class RunnerApp {
 
