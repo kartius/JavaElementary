@@ -1,6 +1,7 @@
 package ua.od.hillel.lesson4;
 
-import ua.od.hillel.nick_tsyb.lesson4.application.Calculator;
+
+import ua.od.hillel.lesson4.application.Calculator;
 
 public class TestGS {
 
