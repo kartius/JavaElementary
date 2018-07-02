@@ -1,4 +1,4 @@
-package ua.od.hillel.oleksandr_romanchenko;
+package src.oleksandr_romanchenko;
 
 import java.util.Scanner;
 

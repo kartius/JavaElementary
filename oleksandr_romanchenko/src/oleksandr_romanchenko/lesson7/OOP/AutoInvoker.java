@@ -1,4 +1,4 @@
-package lesson7.OOP;
+package src.oleksandr_romanchenko.lesson7.OOP;
 
 public class AutoInvoker {
 

@@ -1,4 +1,4 @@
-package ua.od.hillel.oleksandr_romanchenko;
+package src.oleksandr_romanchenko;
 
 public class lesson4 {
     public static void main(String[] args) {

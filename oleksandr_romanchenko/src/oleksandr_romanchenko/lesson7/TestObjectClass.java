@@ -1,4 +1,4 @@
-package lesson7;
+package src.oleksandr_romanchenko.lesson7;
 
 public class TestObjectClass {
 
