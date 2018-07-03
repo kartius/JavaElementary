@@ -1,5 +1,3 @@
-package ua.od.hillel.leonid_andrushchenko;
-
 public class Converter {
 
     public void convert(String currency, float sum)
