@@ -1,10 +1,13 @@
 package lesson8HomeWork;
 
+import lesson8HomeWorkChapter2.Group;
+
 import java.util.ArrayList;
 
 public class Students {
 
-    GroupSub groupSub=new GroupSub();
+
+
     //Переменные
     private String name;
     private int lvl;
@@ -15,14 +18,14 @@ public class Students {
     public Students(String name, int lvl){
         this.name=name;
         this.lvl=lvl;
-        }
+    }
+
 
     //Метод показывающий предметы закреплённые за студентом
         void showSubjects(){
             System.out.println("Optional subjects for "+name+" : "+getGroups());
             System.out.println("Custom subjects for "+name+" : "+getCustom()+"\n");
         }
-
 
 
 
@@ -49,9 +52,10 @@ public class Students {
 
     }
 
-    public void setGroups(String gg) {
-        this.groups.add(gg);
-        
+    public void setGroups(GroupSub obj, Students obj2) {
+        this.groups.add(obj.namegr);
+        obj.setNamest(obj2.name);
+
     }
 
     public void removeGroups(String gg){

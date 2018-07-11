@@ -6,11 +6,11 @@ public class GroupSub {
     String namegr;
     ArrayList<String> namest=new ArrayList<String>();
 
-    public GroupSub(){}
 
     public GroupSub(String namegr){
         this.namegr=namegr;
     }
+
 
     public String getNamegr() {
         return namegr;
@@ -24,10 +24,25 @@ public class GroupSub {
         return namest;
     }
 
-    public void setNamest(String gg) {
-        this.namest.add(gg);
+
+    public void setNamest(String student) {
+
+        namest.add(student);
     }
+
+
     public void removeNamest(String gg) {
         this.namest.remove(gg);
     }
+
+public GroupSub(Students obj){
+        String name=obj.getName();
+}
+
+public void showGroup(){
+    System.out.println("For group "+namegr+" "+namest);
+
+}
+
+
 }
