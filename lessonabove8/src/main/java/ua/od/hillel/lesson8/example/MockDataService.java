@@ -18,7 +18,7 @@ public class MockDataService implements DataService{
 
     @Override
     public void sell(String str, int amount) {
-
+        str = "23";
     }
 
     @Override
