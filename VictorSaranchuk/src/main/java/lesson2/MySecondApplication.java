@@ -1,4 +1,4 @@
-package ua.od.hillel.blackbackroom;
+package lesson2;
 import java.util.Scanner;
 public class MySecondApplication {
     public static void main(String[] args) {
