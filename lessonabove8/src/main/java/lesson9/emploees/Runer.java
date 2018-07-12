@@ -6,6 +6,8 @@ public class Runer {
     public static void main(String[] args) {
 
         Bilder bilder = new Bilder();
+
+        System.out.println(bilder.getClass().getName());
         Developer developer = new Developer();
         Tester tester = new Tester();
         Employe[] employes = new Employe[3];
@@ -26,7 +28,8 @@ public class Runer {
 
             }
         };
-
+        System.out.println("----------------------");
+        System.out.println(lazyEmployee.getClass().getName());
          lazyEmployee.work();
 
        }
