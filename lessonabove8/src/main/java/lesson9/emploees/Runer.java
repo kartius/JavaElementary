@@ -22,7 +22,7 @@ public class Runer {
         LazyEmployee lazyEmployee = new LazyEmployee() {
             @Override
             void work() {
-              System.out.println("work");
+              System.out.println("work1");
 
             }
         };
