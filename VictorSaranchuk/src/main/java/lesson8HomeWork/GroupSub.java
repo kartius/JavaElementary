@@ -41,8 +41,15 @@ public GroupSub(Students obj){
 
 public void showGroup(){
     System.out.println("For group "+namegr+" "+namest);
-
+    proverka();
 }
 
+public void proverka(){
+        if(namest.size()>2){
+            System.out.println("Полная группа");
+        }else {
+            System.out.println("Неполная группа");
+        }
+}
 
 }

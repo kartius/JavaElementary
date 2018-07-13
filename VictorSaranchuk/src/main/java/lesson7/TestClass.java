@@ -31,6 +31,6 @@ public class TestClass {
         System.out.println("-------------------------");
         System.out.println(str4.startsWith("+"));
 
-        
+
     }
 }
