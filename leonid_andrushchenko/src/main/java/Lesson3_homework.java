@@ -1,5 +1,3 @@
-package ua.od.hillel.leonid_andrushchenko;
-
 public class Lesson3_homework {
     public static void main(String[] args)
     {

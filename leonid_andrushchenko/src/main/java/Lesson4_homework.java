@@ -1,5 +1,3 @@
-package ua.od.hillel.leonid_andrushchenko;
-
 import java.util.Scanner;
 
 public class Lesson4_homework {
