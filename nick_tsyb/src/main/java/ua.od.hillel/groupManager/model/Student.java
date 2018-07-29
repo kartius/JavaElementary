@@ -21,6 +21,18 @@ public class Student {
         return name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
     public SchoolClass getSchoolClass() {
         return schoolClass;
     }

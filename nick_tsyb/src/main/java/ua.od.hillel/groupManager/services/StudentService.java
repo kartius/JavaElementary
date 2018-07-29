@@ -1,25 +1,39 @@
 package ua.od.hillel.groupManager.services;
 
+import ua.od.hillel.groupManager.model.Group;
 import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.model.Subject;
+import ua.od.hillel.groupManager.persisting.StudentRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentService {
 
+    private StudentRepository studentRepository;
+
+    public void add(Student student) {
+        studentRepository.add(student);
+    }
+
+    public Student getById(int id) {
+        return studentRepository.get(id);
+    }
+
     public int getLevelClassOfStudent(Student student) {
-        return student.getSchoolClass().getLevel();
-    }
-
-    public Subject[] getAllSubjects(Student student) {
-        int possibleGroups = student.getGroups().size();
-
-        Subject[] groupSubjects = new Subject[possibleGroups];
-        for (int i = 0; i <student.getGroups().size() ; i++) {
-            if (student.getGroups().get(i).isAvailable()) {
-                groupSubjects[i] = student.getGroups().get(i).getSubject();
-            }
+        try {
+            return studentRepository.getLevelClassOfStudent(student);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return student.getSchoolClass().getSubjects();
-
+        return 0;
     }
 
+    public List<Subject> getAllSubjects(Student student) {
+        return studentRepository.getAllSubjects(student);
+    }
+
+    public void setStudentRepository(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 }
