@@ -48,7 +48,7 @@ public class Runner {
 
 
 
-        University<Student, Object> university1 = new University<>();
+        University<Student> university1 = new University<>();
         university1.setStudent(new Student());
         university1.getStudent().doHomeWork();
 

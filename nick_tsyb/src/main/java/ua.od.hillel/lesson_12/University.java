@@ -1,6 +1,6 @@
 package lesson_12;
 
-public class University <T extends Student, Comparable>{
+public class University <T extends Student & Comparable>{
 
 
     private T student;
