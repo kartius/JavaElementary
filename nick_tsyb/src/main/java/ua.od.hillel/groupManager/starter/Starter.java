@@ -92,6 +92,9 @@ public class Starter {
         System.out.println(groupManager.getAmountOfAvailableGroups());
 
 
+        groupManager.deleteById(2);
+
+
 
 
     }

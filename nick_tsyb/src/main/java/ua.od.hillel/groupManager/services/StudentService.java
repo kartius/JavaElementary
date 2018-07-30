@@ -20,6 +20,10 @@ public class StudentService {
         return studentRepository.get(id);
     }
 
+    public void deleteById(int id){
+        studentRepository.delete(id);
+    }
+
     public int getLevelClassOfStudent(Student student) {
         try {
             return studentRepository.getLevelClassOfStudent(student);

@@ -5,6 +5,7 @@ import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.persisting.GroupRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -37,9 +38,10 @@ public class GroupRepositoryInMemory implements GroupRepository {
 
     @Override
     public void delete(int id) {
-        for (Group group : groups) {
-            if (group.getId() == id) {
-                groups.remove(group);
+        Iterator<Group> iterator = groups.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getId() == id) {
+                iterator.remove();
             }
         }
     }
@@ -58,7 +60,7 @@ public class GroupRepositoryInMemory implements GroupRepository {
     @Override
     public Group get(int id) {
         for (Group group : groups) {
-            if (group.getId()==id){
+            if (group.getId() == id) {
                 return group;
             }
         }

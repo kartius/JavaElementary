@@ -15,6 +15,10 @@ public class GroupManager {
         groupRepository.add(group);
     }
 
+    public void deleteById(int id){
+        groupRepository.delete(id);
+    }
+
     public Group getById(int id){
        return groupRepository.get(id);
     }
