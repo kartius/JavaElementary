@@ -6,6 +6,8 @@ public class SchoolClass {
     protected Subject[] subjects;
     protected Student[] students;
 
+    public SchoolClass(){};
+
     public SchoolClass(int classLevel, Subject[] subjects, Student[] students) {
         this.classLevel = classLevel;
         this.subjects = subjects;

@@ -21,6 +21,7 @@ public class DB_objects {
     static SchoolClass twoClass = new SchoolClass(2, new Subject[1], new Student[3]);
     static SchoolClass threeClass = new SchoolClass(3, new Subject[1], new Student[3]);
 
+
     static Group group1 = new Group(english);
     static Group group2 = new Group(dataBase);
 
