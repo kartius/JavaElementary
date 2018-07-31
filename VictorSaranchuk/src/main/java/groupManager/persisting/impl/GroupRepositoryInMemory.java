@@ -12,6 +12,7 @@ public class GroupRepositoryInMemory implements GroupRepository {
     private List<Group>groups = new ArrayList<Group>();
 
     public void assignStudentToGroup(Group group, Student student) {
+
     }
 
     public int getAmountofAvailableGroups() {

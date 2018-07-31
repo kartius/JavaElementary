@@ -42,6 +42,24 @@ public class Starter {
         student3.setSchoolClass(schoolClass);
         student3.setGroups(new ArrayList<Group>());
 
+        Student student4=new Student();
+        student4.setId(4);
+        student4.setName("Alice");
+        student4.setSchoolClass(schoolClass);
+        student4.setGroups(new ArrayList<Group>());
+
+        Student student5=new Student();
+        student5.setId(5);
+        student5.setName("Cooper");
+        student5.setSchoolClass(schoolClass);
+        student5.setGroups(new ArrayList<Group>());
+
+        Student student6=new Student();
+        student6.setId(6);
+        student6.setName("Donald");
+        student6.setSchoolClass(schoolClass);
+        student6.setGroups(new ArrayList<Group>());
+
         //create groups
         Group group1=new Group();
         group1.setId(1);
@@ -71,12 +89,22 @@ public class Starter {
         groupManager.add(group1);
         groupManager.add(group2);
 
-        groupManager.assignStudentToGroup(group1,student1);
-        groupManager.assignStudentToGroup(group1,student2);
-        groupManager.assignStudentToGroup(group1,student3);
+        groupManager.assignStudentToGroup(group1, student1);
+        groupManager.assignStudentToGroup(group1, student2);
+        groupManager.assignStudentToGroup(group1, student3);
+        groupManager.assignStudentToGroup(group1, student4);
+        groupManager.assignStudentToGroup(group1, student5);
+        groupManager.assignStudentToGroup(group1, student6);
+
 
         groupManager.assignStudentToGroup(group2,student1);
         groupManager.assignStudentToGroup(group2,student3);
+
+        //create SpecialClass
+        SpecialClass specialClass=new SpecialClass();
+
+        specialClass.add(student1);
+
 
         System.out.println(groupManager.getAmountOfAvailableGrous());
 
