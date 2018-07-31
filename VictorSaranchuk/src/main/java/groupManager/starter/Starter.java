@@ -16,7 +16,8 @@ public class Starter {
                             , new Subject("Philosophy")
                             , new Subject("Anatomy")
                             , new Subject("Sport")
-                            , new Subject("Biology"));
+                            , new Subject("Biology")
+                            , new Subject("Math"));
 
         SchoolClass schoolClass=new SchoolClass();
         schoolClass.setLevel(1);
@@ -48,9 +49,9 @@ public class Starter {
         group1.setStudents(new ArrayList<Student>());
 
         Group group2=new Group();
-        group1.setId(2);
-        group1.setSubject(new Subject("Flying"));
-        group1.setStudents(new ArrayList<Student>());
+        group2.setId(2);
+        group2.setSubject(new Subject("Flying"));
+        group2.setStudents(new ArrayList<Student>());
 
         StudentRepository studentRepository=new StudentRepositoryInMemory();
         GroupRepository groupRepository=new GroupRepositoryInMemory();
@@ -63,7 +64,9 @@ public class Starter {
         studentService.add(student3);
 
         GroupManager groupManager=new GroupManager();
+        groupManager.setStudentRepository(studentRepository);
         groupManager.setGroupRepository(groupRepository);
+
 
         groupManager.add(group1);
         groupManager.add(group2);
