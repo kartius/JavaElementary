@@ -48,6 +48,7 @@ for (int i=0;i<5000; i++){
         l=System.nanoTime();
 
 
+
         for (int i=0;i<=5000; i++){
             linkedList.add(((linkedList.size()-linkedList.size()%2))/2,i);
         }
