@@ -8,6 +8,8 @@ import ua.od.hillel.vadim_zadorozhnyuk.student_management.persisting.StudentRepo
 import ua.od.hillel.vadim_zadorozhnyuk.student_management.services.GroupManager;
 import ua.od.hillel.vadim_zadorozhnyuk.student_management.services.StudentService;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -62,10 +64,12 @@ public class Main {
         groupManager.add(group1);
         groupManager.add(group2);
         groupManager.assignStudentToGroup(group1,vasya);
+        groupManager.assignStudentToGroup(group2,vasya);
         groupManager.assignStudentToGroup(group1,petya);
         groupManager.assignStudentToGroup(group1,fedya);
 
         System.out.println(groupManager.getAmountOfAvailableGroups());
+        System.out.println(json.toJson(studentService.getAllSubjects(vasya)));
 
 
 
