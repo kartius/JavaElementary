@@ -1,11 +1,9 @@
 package ua.od.hillel.vadim_zadorozhnyuk.student_management;
 
 public class Subject {
-    protected String title;
-    protected boolean optional;
+     String title;
 
-    public Subject(String title, boolean optional) {
+    public Subject(String title) {
         this.title = title;
-        this.optional = optional;
-    }
+        }
 }

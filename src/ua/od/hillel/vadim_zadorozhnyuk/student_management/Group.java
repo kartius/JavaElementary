@@ -3,16 +3,23 @@ package ua.od.hillel.vadim_zadorozhnyuk.student_management;
 import java.util.LinkedList;
 
 public class Group {
-    protected Subject subject;
-    protected LinkedList<Student> students = new LinkedList<>();
-    protected boolean hasThreeStudents;
+    public int id;
+    public Subject subject;
+     LinkedList<Student> students = new LinkedList<>();
+     boolean hasThreeStudents;
 
-    public Group(Subject subject) {
+    public Group(Subject subject, int id) {
         this.subject = subject;
+        this.id = id;
     }
 
-    public void addStudent(Student student){
-        students.addLast(student);
+    public boolean isAvailable() {
+        return hasThreeStudents;
+    }
+
+    public void addStudent(Student student) throws Exception {
+        if(students.size()<=5){
+        students.addLast(student);}else{throw new Exception("The group is full!");}
         if(students.size()>=3){
             hasThreeStudents=true;
         }else{hasThreeStudents=false;}
@@ -24,4 +31,6 @@ public class Group {
             hasThreeStudents=true;
         }else{hasThreeStudents=false;}
     }
+
+
 }
