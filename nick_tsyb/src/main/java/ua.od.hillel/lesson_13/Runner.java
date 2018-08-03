@@ -2,7 +2,7 @@ package ua.od.hillel.lesson_13;
 
 import java.util.*;
 
-public class Runner {
+public class  Runner {
 
 
     public static void simpleBanchmark() {
