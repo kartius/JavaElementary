@@ -48,7 +48,9 @@ public class Starter {
 
         //Show who in a bucket
         System.out.println("------------------------------");
+
         hotelManager.show2('B');
+
         hotelManager.show2('J');
     }
 
