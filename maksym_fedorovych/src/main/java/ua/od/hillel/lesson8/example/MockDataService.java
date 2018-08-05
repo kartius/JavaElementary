@@ -1,6 +1,6 @@
 package ua.od.hillel.lesson8.example;
 
-public class MockDataService implements DataService{
+public class MockDataService implements ua.od.hillel.lesson8.example.DataService {
 
 
     String [] vacuums= new String[10];
