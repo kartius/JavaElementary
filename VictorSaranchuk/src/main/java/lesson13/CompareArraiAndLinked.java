@@ -8,69 +8,46 @@ public class CompareArraiAndLinked {
     public static void main(String[] args) {
 
 
-    List<Integer> arrayList=new ArrayList<Integer>();
+    List<Integer> arrayList=new ArrayList<Integer>(5000);
     List<Integer> linkedList=new LinkedList<Integer>();
 
-        System.out.println("Вставка в конец");
 
-        System.out.println("ArrayList time");
-long l=System.nanoTime();
+long t=System.nanoTime();
 
-
-for (int i=0;i<=5000; i++){
+for (int i=0; i<5000; i++){
     arrayList.add(i);
 }
-        System.out.println(System.nanoTime()-l);
+        System.out.println("ArrayList add at "+(System.nanoTime()-t));
 
+t=System.nanoTime();
 
-        System.out.println("Linkedlist time");
-l=System.nanoTime();
-
-for (int i=0;i<5000; i++){
+for (int i=0; i<5000; i++){
     linkedList.add(i);
 }
-        System.out.println(System.nanoTime()-l);
+        System.out.println("LinkedList add at "+(System.nanoTime()-t));
 
-//--------------------------------------
-        System.out.println("вставка в элемент 2500");
+t=System.nanoTime();
+for (int i=0; i<5000; i++){
+    arrayList.add(2500, i);
+}
+        System.out.println("ArrayList add 2500 at "+(System.nanoTime()-t));
 
+t=System.nanoTime();
+for(int i = 0; i<5000; i++){
+    linkedList.add(2500,i);
+}
+        System.out.println("LinkedList add 2500 at "+(System.nanoTime()-t));
 
-        System.out.println("ArrayList time replace 2500");
-        l=System.nanoTime();
+t=System.nanoTime();
+for (int i=0; i<5000; i++){
+    arrayList.add((arrayList.size()-arrayList.size()%2)/2,i);
+}
+        System.out.println("ArrayList add to center at "+(System.nanoTime()-t));
 
-
-        for (int i=0;i<=5000; i++){
-            arrayList.add(2500,i);
-        }
-        System.out.println(System.nanoTime()-l);
-
-        System.out.println("ArrayList time JIT replace 2500");
-        l=System.nanoTime();
-
-
-
-        for (int i=0;i<=5000; i++){
-            linkedList.add(((linkedList.size()-linkedList.size()%2))/2,i);
-        }
-        System.out.println(System.nanoTime()-l);
-
-        System.out.println("Linkedlist time replace 2500");
-        l=System.nanoTime();
-
-        for (int i=0;i<5000; i++){
-            linkedList.add(2500,i);
-        }
-        System.out.println(System.nanoTime()-l);
-
-
-        System.out.println("Linkedlist time JIT replace 2500");
-        l=System.nanoTime();
-
-        for (int i=0;i<5000; i++){
-            linkedList.add(((linkedList.size()-linkedList.size()%2))/2,i);
-        }
-        System.out.println(System.nanoTime()-l);
-
-
+t=System.nanoTime();
+for (int i=0;i<5000;i++){
+    linkedList.add((linkedList.size()-linkedList.size()%2)/2,i);
+}
+        System.out.println("LinkedList add to center at "+(System.nanoTime()-t));
 
     }}
