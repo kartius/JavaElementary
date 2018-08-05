@@ -3,20 +3,17 @@ package ua.od.hillel.vadim_zadorozhnyuk.student_management;
 import java.util.LinkedList;
 
 public class SpecialClass extends SchoolClass {
-    LinkedList<Student> students;
+    LinkedList<Student> students = new LinkedList<>();
 
-    Subject subject = new Subject("HTML", true);
+    Subject subject = new Subject("HTML");
 
     public void addStudent(Student student){
         students.addLast(student);
-        StudentService studentService = new StudentService();
-        studentService.addSubject(student, this.subject);
+        student.subjects.add(this.subject);
     }
 
     public void delStudent(Student student){
         students.remove(student);
-        StudentService studentService = new StudentService();
-        studentService.delSubject(student, this.subject);
-
+        student.subjects.remove(this.subject);
     }
 }
