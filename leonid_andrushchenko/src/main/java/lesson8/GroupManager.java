@@ -30,18 +30,23 @@ public class GroupManager {
     {
         for (int i = 0; i < groups.size(); i++)
         {
-            groups.get(i).addStudent(student);
+            if(groups.get(i).getName().equals(group_name)) {
+                groups.get(i).addStudent(student);
+                student.addSubject(groups.get(i).getSubject());// Добавляет предмет в список студента
+            }
             return;
         }
         System.out.println("Группа не найдена");
     }
 
-    public void delete_student_from_group(Student student, String group_name)// Находит группу по её названию и удаляет отуда студента
+    public void delete_student_from_group(Student student, String group_name)// Находит группу по её названию и удаляет оттуда студента
     {
         for (int i = 0; i < groups.size(); i++)
         {
-            groups.get(i).deleteStudent(student.getName());
-            return;
+            if(groups.get(i).getName().equals(group_name)) {
+                groups.get(i).deleteStudent(student.getName());
+                student.deleteSubject(groups.get(i).getSubject().getName());// удаляет предмет из списка студента
+            }
         }
         System.out.println("Группа не найдена");
     }

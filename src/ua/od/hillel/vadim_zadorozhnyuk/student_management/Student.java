@@ -3,12 +3,15 @@ package ua.od.hillel.vadim_zadorozhnyuk.student_management;
 import java.util.LinkedList;
 
 public class Student {
-    protected String name;
-    protected int classLevel;
-    protected LinkedList<Subject> subjects = new LinkedList<>();
+     public int id;
+     String name;
+    public SchoolClass schoolClass = new SchoolClass();
+    public LinkedList<Group> groups = new LinkedList<>();
+    public LinkedList<Subject> subjects = new LinkedList<>();
 
-    public Student(String name, int classLevel) {
+
+    public Student(String name, int id) {
         this.name = name;
-        this.classLevel = classLevel;
+        this.id = id;
     }
 }

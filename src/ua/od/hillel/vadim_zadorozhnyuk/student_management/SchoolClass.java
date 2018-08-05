@@ -1,14 +1,36 @@
 package ua.od.hillel.vadim_zadorozhnyuk.student_management;
 
 
-public class SchoolClass {
-    protected int classLevel;
-    protected Subject[] subjects;
-    protected Student[] students;
+import java.util.LinkedList;
 
-    public SchoolClass(int classLevel, Subject[] subjects, Student[] students) {
+
+public class SchoolClass {
+    public int classLevel;
+     LinkedList<Subject> subjects = new LinkedList<>();
+     LinkedList<Student> students = new LinkedList<>();
+
+    public SchoolClass(){}
+
+    public SchoolClass(int classLevel){
         this.classLevel = classLevel;
-        this.subjects = subjects;
-        this.students = students;
     }
+
+    public void setSubject(Subject subject){
+        subjects.add(subject);
+    }
+    public void delSubject(Subject subject){
+        subjects.remove(subject);
+    }
+    public void addStudent(Student student){
+        students.add(student);
+        student.schoolClass.classLevel=this.classLevel;
+        student.subjects.addAll(this.subjects);
+    }
+    public void delStudent(Student student){
+        students.remove(student);
+        student.schoolClass.classLevel=0;
+        student.subjects.removeAll(this.subjects);
+    }
+
+
 }

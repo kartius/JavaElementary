@@ -22,24 +22,6 @@ public class StudentService {
         System.out.println("Данного предмета не существует");
     }
 
-    public void add_subject_to_student(Student student, String subject_name)// Находит предмет из списка по его названию и добавляет в список студента
-    {
-
-        for (int i = 0; i < optional_subjects.size(); i++){
-            if (optional_subjects.get(i).getName().equals(subject_name)){
-                student.addSubject(optional_subjects.get(i));
-                return;
-            }
-        }
-        System.out.println("Данного предмета не существует");
-
-    }
-
-    public void delete_subject_from_student(Student student, String subject_name)// Находит предмет из списка студента по названию и удаляет его
-    {
-        student.deleteSubject(subject_name);
-    }
-
     public ArrayList<Subject> getOptional_subjects() // Возвращает список всех текущих опциональных предметов
     {
         return optional_subjects;
