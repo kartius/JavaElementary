@@ -9,6 +9,7 @@ public class Main {
         StudentService studentService = new StudentService();
         GroupManager groupManager = new GroupManager();
         Gson json = new Gson();
+        SpecialClass specialClass = new SpecialClass();
 
         System.out.println(studentService.getListSubjects());
         System.out.println(studentService.getLevelCass(DB_objects.fedya));
