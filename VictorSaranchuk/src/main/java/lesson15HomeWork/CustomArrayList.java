@@ -157,38 +157,4 @@ public class CustomArrayList implements CustomList,Iterable {
         return invertIterator;
     }
 
-    public Iterator listIterator(){
-        shuffle(array);
-        Iterator<String> invert=new Iterator<String>() {
-            int index=array.length-1;
-            @Override
-            public boolean hasNext() {
-                return index>=0;
-            }
-
-            @Override
-            public String next() {
-                return array[index--];
-            }
-        };
-        return invert;
-    }
-
-
-    public  static void shuffle(String[] array){
-        Random random=new Random(System.nanoTime());
-        for(int i=0; i<array.length; i++){
-            swap(array, i, random.nextInt(array.length));
-        }
-    }
-
-    public static void swap(String[] arr, int i, int j){
-        String tmp=arr[i];
-        arr[i]=arr[j];
-        arr[j]=tmp;
-
-
-    }
-
-
 }

@@ -40,21 +40,14 @@ public class Runner {
         System.out.println();
 
 //        customArrayList.clear();
+
+
         System.out.println(customArrayList.size());
 
         Iterator iterator=customArrayList.iterator();
 
         while (iterator.hasNext()){
             String s=iterator.next().toString();
-            System.out.print(s+" ");
-        }
-
-
-        System.out.println();
-        Iterator listIterator=customArrayList.listIterator();
-
-        while (listIterator.hasNext()){
-            String s=listIterator.next().toString();
             System.out.print(s+" ");
         }
 
