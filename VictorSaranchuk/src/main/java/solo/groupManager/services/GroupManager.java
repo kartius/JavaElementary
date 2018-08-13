@@ -26,16 +26,16 @@ public int getAmountOfAvailableGrous(){
 }
 
 public void assignStudentToGroup(Group group, Student student){
+    if (group.getStudents().size() < 5) {
+
     group.getStudents().add(student);
     groupRepository.update(group);
     student.getGroups().add(group);
     studentRepository.update(student);
-    if(group.getStudents().size()>5){
-        group.getStudents().remove(student);
-        groupRepository.update(group);
-        student.getGroups().remove(group);
-        studentRepository.update(student);
-        System.out.println(student.getName()+" can't add to group");
+
+    }
+    else{
+        System.out.println(student+" can't add to group, because group is full");
     }
 }
 
