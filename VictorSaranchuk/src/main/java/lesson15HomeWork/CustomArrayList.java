@@ -157,6 +157,23 @@ public class CustomArrayList implements CustomList,Iterable {
         return invertIterator;
     }
 
+    public Iterator listIterator(){
+        shuffle(array);
+        Iterator<String> invert=new Iterator<String>() {
+            int index=array.length-1;
+            @Override
+            public boolean hasNext() {
+                return index>=0;
+            }
+
+            @Override
+            public String next() {
+                return array[index--];
+            }
+        };
+        return invert;
+    }
+
 
     public  static void shuffle(String[] array){
         Random random=new Random(System.nanoTime());

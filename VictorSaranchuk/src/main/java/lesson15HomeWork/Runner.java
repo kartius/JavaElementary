@@ -50,7 +50,13 @@ public class Runner {
         }
 
 
+        System.out.println();
+        Iterator listIterator=customArrayList.listIterator();
 
+        while (listIterator.hasNext()){
+            String s=listIterator.next().toString();
+            System.out.print(s+" ");
+        }
 
     }
 
