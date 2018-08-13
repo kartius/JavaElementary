@@ -169,7 +169,9 @@ public class CustomArrayList implements CustomList,Iterable {
         String tmp=arr[i];
         arr[i]=arr[j];
         arr[j]=tmp;
+
+
     }
-    
+
 
 }
