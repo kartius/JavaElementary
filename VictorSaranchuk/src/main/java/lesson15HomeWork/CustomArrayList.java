@@ -1,10 +1,12 @@
 package lesson15HomeWork;
 
 
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
-public class CustomArrayList implements CustomList {
+public class CustomArrayList implements CustomList,Iterable {
     //constant
     private final int firstSize=0;
     String[] array=new String[firstSize];
@@ -135,61 +137,39 @@ public class CustomArrayList implements CustomList {
         array=newArray;}
     }
 
+    @Override
+    public Iterator iterator() {
+        Iterator<String> invertIterator=new Iterator<String>() {
+
+            int index=array.length-1;
+            @Override
+            public boolean hasNext() {
+                return index>=0;
+            }
+
+            @Override
+            public String next() {
+                return array[index--];
+            }
+        };
 
 
+        return invertIterator;
+    }
 
-    class CustomArrayListIterator implements ListIterator {
-        private int cursor;
-        private String[] array;
 
-        CustomArrayListIterator(String[] newArray){
-            this.array=newArray;
-            this.cursor=newArray.length;
-        }
-
-        @Override
-        public boolean hasNext() { return cursor!=size(); }
-
-        @Override
-        public String next() {
-            return null;
-        }
-
-        @Override
-        public boolean hasPrevious() {
-            return cursor!=0;
-        }
-
-        @Override
-        public String previous() {
-            if(cursor==0) throw new NoSuchElementException();
-
-            return array[cursor--];
-        }
-
-        @Override
-        public int nextIndex() {
-            return 0;
-        }
-
-        @Override
-        public int previousIndex() {
-            return 0;
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void set(Object o) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void add(Object o) {
-            throw new UnsupportedOperationException();
+    public  static void shuffle(String[] array){
+        Random random=new Random(System.nanoTime());
+        for(int i=0; i<array.length; i++){
+            swap(array, i, random.nextInt(array.length));
         }
     }
+
+    public static void swap(String[] arr, int i, int j){
+        String tmp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=tmp;
+    }
+    
+
 }
