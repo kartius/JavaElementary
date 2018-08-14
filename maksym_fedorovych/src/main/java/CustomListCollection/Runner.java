@@ -13,7 +13,7 @@ public class Runner {
         customArrayList.set(13, "add 12 value");
         customArrayList.remove(13);
         customArrayList.remove("444");
-        customArrayList.add(50000, "444");
+        customArrayList.add(50001, "444");
 
         for (int i = 0; i < customArrayList.size(); i++) {
             {
