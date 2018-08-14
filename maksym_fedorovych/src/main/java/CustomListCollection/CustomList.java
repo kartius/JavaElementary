@@ -1,5 +1,7 @@
 package main.java.CustomListCollection;
 
+import java.util.Iterator;
+
 public interface CustomList {
     int size();
     boolean isEmpty();
@@ -12,6 +14,7 @@ public interface CustomList {
     String get(int index);
     void set(int index, String element);
     int indexOf(String element);
-
+    Iterator backwardIterator();
+    Iterator randomIterator();
 
 }

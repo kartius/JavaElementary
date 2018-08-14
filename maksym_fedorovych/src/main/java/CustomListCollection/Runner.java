@@ -1,5 +1,7 @@
 package main.java.CustomListCollection;
 
+import java.util.Iterator;
+
 public class Runner {
     public static void main(String[] args) {
         CustomArrayList customArrayList = new CustomArrayList();
@@ -11,6 +13,7 @@ public class Runner {
         customArrayList.set(13, "add 12 value");
         customArrayList.remove(13);
         customArrayList.remove("444");
+        customArrayList.add(50000, "444");
 
         for (int i = 0; i < customArrayList.size(); i++) {
             {
@@ -23,13 +26,27 @@ public class Runner {
 
         System.out.println(customArrayList.indexOf("add 8") );
         System.out.println(customArrayList.indexOf("add 8 value") );
-        customArrayList.clear();
+       // customArrayList.clear();
 
         for (int i = 0; i < customArrayList.size(); i++) {
             {
                 System.out.println("index " + i + " Значение " + customArrayList.get(i));
 
             }
+        }
+
+
+        System.out.println("-------------------------------------");
+        Iterator iterator = customArrayList.backwardIterator();
+        while (iterator.hasNext())
+        {
+            System.out.println(iterator.next());
+        }
+        System.out.println("-------------------------------------");
+        Iterator iterator2 = customArrayList.randomIterator();
+        while (iterator2.hasNext())
+        {
+            System.out.println(iterator2.next());
         }
 
 
