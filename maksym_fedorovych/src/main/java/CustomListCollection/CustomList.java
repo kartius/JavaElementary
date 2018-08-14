@@ -12,4 +12,6 @@ public interface CustomList {
     String get(int index);
     void set(int index, String element);
     int indexOf(String element);
+
+
 }

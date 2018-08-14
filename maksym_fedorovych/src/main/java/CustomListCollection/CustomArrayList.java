@@ -2,6 +2,7 @@ package main.java.CustomListCollection;
 
 public class CustomArrayList implements CustomList{
     private String[] inArray;
+    private int currIndex = -1;
 
     public CustomArrayList() {
         inArray = new String[0];
