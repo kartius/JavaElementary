@@ -124,40 +124,114 @@ public class CustomArrayList implements CustomList {
 
     public Iterator iterator(){return new Itr();}
 
-    private class Itr implements Iterator{
-        int hasNext = 0;
-        int next = 0;
-        int remove = 0;
+    private class Itr implements Iterator {
+        int point = 0;
 
         @Override
         public boolean hasNext() {
-            if(size==0){return false;}
-            if(str[hasNext]!=null&&(size-1)>hasNext)
-            {hasNext++;
-            return true;}
 
-            return false;
+            return point < size;
         }
 
         @Override
         public String next() {
-            if(size==0){return null;}
-            if(next<size){next++;
-                return str[next-1];}
+            if (size == 0) {
                 return null;
+            }
+            if (point < size) {
+                return str[point++];
+            }
+            return null;
 
         }
 
         @Override
         public void remove() {
-            if(size>0){
-                size--;
-                str[remove]=null;
-                remove++;
+            if (size > 0) {
+                str[--size] = null;
             }
 
         }
+    }
+        public Iterator backwardIterator(){return new ItrBack();}
+
+        private class ItrBack implements Iterator{
+            int point = size-1;
+
+            @Override
+            public boolean hasNext() {
+
+                return point>=0;
+            }
+
+            @Override
+            public String next() {
+                if(size==0){return null;}
+                if(point>=0){return str[point--];}
+                return null;
+
+            }
+
+            @Override
+            public void remove() {
+                if(size>0){
+                    str[--size]=null;
+                }
+
+            }
 
 
     }
+    public Iterator randomIterator(){return new ItrRand();}
+
+    private class ItrRand implements Iterator {
+        int point;
+        int[] randomPoint;
+
+        ItrRand(){
+            point=0;
+            randomPoint = new int[size];
+            for (int i = 0; i < size ; i++) {
+               randomPoint[i] = i;
+            }
+            int temp;
+            int k;
+            for (int i = 0; i < size; i++) {
+                temp = randomPoint[i];
+                k = (int)(Math.random()*size);
+                randomPoint[i]=randomPoint[k];
+                randomPoint[k]=temp;
+
+            }
+        }
+
+
+
+        @Override
+        public boolean hasNext() {
+
+            return point < size;
+        }
+
+        @Override
+        public String next() {
+            if (size == 0) {
+                return null;
+            }
+            if (point < size) {
+                return str[randomPoint[point++]];
+            }
+            return null;
+
+        }
+
+        @Override
+        public void remove() {
+            if (size > 0) {
+                str[--size] = null;
+            }
+
+        }
+    }
+
 }
