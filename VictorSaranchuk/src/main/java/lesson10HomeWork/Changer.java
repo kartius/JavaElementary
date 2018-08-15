@@ -45,10 +45,12 @@ public class Changer {
         String strCheck=sc.nextLine().trim();
         StringBuilder strc=new StringBuilder(strCheck);
         String mass[]=strCheck.split(" ");
+
         for (String n:mass
              ) {
             if (n.length()<4){
             System.out.print(n+" ");}
+
             else{
                 int c=((n.length()-2));
                 char first=n.charAt(0);
