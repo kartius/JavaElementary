@@ -8,4 +8,7 @@ public class Subject {
 
     private String name;
 
+    public String getName() {
+        return name;
+    }
 }

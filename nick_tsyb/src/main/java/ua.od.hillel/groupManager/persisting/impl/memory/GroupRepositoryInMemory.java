@@ -1,4 +1,4 @@
-package ua.od.hillel.groupManager.persisting.impl;
+package ua.od.hillel.groupManager.persisting.impl.memory;
 
 import ua.od.hillel.groupManager.model.Group;
 import ua.od.hillel.groupManager.model.Student;

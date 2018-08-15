@@ -6,8 +6,10 @@ import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.model.Subject;
 import ua.od.hillel.groupManager.persisting.GroupRepository;
 import ua.od.hillel.groupManager.persisting.StudentRepository;
-import ua.od.hillel.groupManager.persisting.impl.GroupRepositoryInMemory;
-import ua.od.hillel.groupManager.persisting.impl.StudentRepositoryInMemory;
+import ua.od.hillel.groupManager.persisting.impl.file.GroupRepositoryFile;
+import ua.od.hillel.groupManager.persisting.impl.memory.GroupRepositoryInMemory;
+import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
+import ua.od.hillel.groupManager.persisting.impl.memory.StudentRepositoryInMemory;
 import ua.od.hillel.groupManager.services.GroupManager;
 import ua.od.hillel.groupManager.services.StudentService;
 
@@ -20,7 +22,7 @@ public class Starter {
 
     public static void main(String[] args) {
 
-               //init school
+        //init school
         List<Subject> subjects = Arrays.asList(new Subject("History")
                 , new Subject("Math")
                 , new Subject("Geography")
@@ -63,9 +65,25 @@ public class Starter {
         group2.setId(2);
         group2.setSubject(new Subject("Quantum physics"));
         group2.setStudents(new ArrayList<Student>());
+        StudentRepository studentRepository = null;
+        GroupRepository groupRepository = null;
 
-        StudentRepository studentRepository = new StudentRepositoryInMemory();
-        GroupRepository groupRepository = new GroupRepositoryInMemory();
+        if (System.getenv("ENV_TYPE") != null) {
+            System.out.println("environment is " + System.getenv("ENV_TYPE"));
+            if (System.getenv("ENV_TYPE").equals("dev")) {
+                studentRepository = new StudentRepositoryInMemory();
+                groupRepository = new GroupRepositoryInMemory();
+            } else if (System.getenv("ENV_TYPE").equals("qa")) {
+                studentRepository = new StudentRepositoryFile();
+                groupRepository = new GroupRepositoryFile();
+            } else if (System.getenv("ENV_TYPE").equals("prod")) {
+                //init db implementation
+            }
+        } else {
+            System.out.println("please set env type! Now using default implementation");
+            studentRepository = new StudentRepositoryInMemory();
+            groupRepository = new GroupRepositoryInMemory();
+        }
 
 
         StudentService studentService = new StudentService();
@@ -74,6 +92,7 @@ public class Starter {
         studentService.add(student1);
         studentService.add(student2);
         studentService.add(student3);
+        Student student = studentService.getById(2);
 
         GroupManager groupManager = new GroupManager();
         groupManager.setStudentRepository(studentRepository);
