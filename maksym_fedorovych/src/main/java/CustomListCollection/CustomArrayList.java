@@ -6,31 +6,34 @@ import java.util.Iterator;
 public class CustomArrayList implements CustomList{
     private static int random(int minValue, int maxValue)
     {
-        double drandom; //случайное значение не спроецированное на интервал
-        //int minValue = -1000; //Нижний предел
-        //int maxValue = 1; //Верхний предел
-        int toZero = 0; //смещение к 0
-        int res; //результат
-
-        toZero = minValue*-1;
-        drandom = Math.random();
 
 
-        int percentValue;
-        if ((int)(drandom*1000) >100 ||(int)(drandom*1000) < 100 )
-        { percentValue = (int)(drandom*100); }
-        else
-        { percentValue = (int)(drandom*1000); }
+        maxValue -= minValue;
+        return (int) (Math.random() * ++maxValue) + minValue;
+
+        //double drandom; //случайное значение не спроецированное на интервал
+      //  int toZero = 0; //смещение к 0
+      //  int res; //результат
+
+        //toZero = minValue*-1;
+       // drandom = Math.random();
+
+
+        //int percentValue;
+        //if ((int)(drandom*1000) >100 ||(int)(drandom*1000) < 100 )
+        //{ percentValue = (int)(drandom*100); }
+//        else
+  //      { percentValue = (int)(drandom*1000); }
 
 
 
-        res = (int)((Math.round(((maxValue + toZero)*percentValue/100.00))) - toZero);
+    //    res = (int)((Math.round(((maxValue + toZero)*percentValue/100.00))) - toZero);
 
 
         //System.out.println("Случайное значение не спроецированное на интервал: " + drandom);
         //System.out.println("Случайный процент: " + percentValue);
         //System.out.println("Случайное значение: " + res);
-        return res;
+      //  return res;
 
     }
     private String[] inArray;
@@ -246,12 +249,13 @@ public class CustomArrayList implements CustomList{
         int minRandomInterval = 0;
         int[] inArrayRandom;
 
-        private int MinUseIndex()
+        private void SetMinUseIndex()
         {
             /*Сдвигает границы рандомного интервала, для более быстрого поиска
 
              */
-
+            if ((positionByValue(minRandomInterval) != -1)&&(minRandomInterval < inArrayRandom.length - 1)) {minRandomInterval++;}
+            /*
             int mini = minRandomInterval;
             for (int i = minRandomInterval; i < inArrayRandom.length; i++){
                 if ((inArrayRandom[minRandomInterval]!= -1)&&(inArrayRandom[i] == -1)&&( i > minRandomInterval))
@@ -262,13 +266,15 @@ public class CustomArrayList implements CustomList{
 
             }
             return mini;
+            */
         }
 
-        private int MaxUseIndex() {
+        private void SetMaxUseIndex() {
              /*Сдвигает границы рандомного интервала, для более быстрого поиска
 
              */
-            int maxi = maxRandomInterval;
+             if ((positionByValue(maxRandomInterval) != -1)&&(maxRandomInterval > 0)) {maxRandomInterval--;}
+            /*int maxi = maxRandomInterval;
             for (int i = inArrayRandom.length -1; i >= 0; i--){
                 if ((inArrayRandom[maxRandomInterval]!= -1)&&(inArrayRandom[i] == -1)&&( i < maxRandomInterval))
                 {
@@ -276,8 +282,8 @@ public class CustomArrayList implements CustomList{
                 }
                 if (maxi != maxRandomInterval) {break;}
 
-            }
-            return maxi;
+            }*/
+            //return maxi;
         }
 
 
@@ -296,7 +302,7 @@ public class CustomArrayList implements CustomList{
             return flag;
         }
 
-    /*    private int positionByValue(int value) {
+        private int positionByValue(int value) {
             int flag = -1;
             for (int i = 0; i < inArrayRandom.length; i++){
                 if (inArrayRandom[i] == value){
@@ -305,7 +311,7 @@ public class CustomArrayList implements CustomList{
             }
             return flag;
         }
-*/
+
 
         RandomIterator() {
           /*создаем массив интов  inArray.length,
@@ -323,17 +329,20 @@ public class CustomArrayList implements CustomList{
 
           for (int i = 0; i < inArrayRandom.length; i++ )
           {
+
+
               int randomValue = 0;
               while (inArrayRandom[i] == -1)
               {
                   randomValue = random(minRandomInterval, maxRandomInterval);
                   if (!isContaining(randomValue)) {
                       inArrayRandom[i] = randomValue;
+                      if ((maxRandomInterval - minRandomInterval) > 1) {
 
-                     /* if ((maxRandomInterval - minRandomInterval) > 1) {
-                          maxRandomInterval = MaxUseIndex();
-                          minRandomInterval = MinUseIndex();
-                      }*/
+                       SetMaxUseIndex();
+                       SetMinUseIndex();
+                      }
+
                   }
 
               }
