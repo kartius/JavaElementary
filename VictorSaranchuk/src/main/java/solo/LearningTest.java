@@ -15,6 +15,11 @@ public class LearningTest {
             System.out.print(s+" ");
         }
 
+        boolean[] c=new boolean[5];
+        for (boolean b:c
+             ) {
+            System.out.println(b);
+        }
 
     }
 
@@ -31,6 +36,9 @@ public class LearningTest {
         arr[i]=arr[j];
         arr[j]=tmp;
     }
+
+
+
 
 
 }

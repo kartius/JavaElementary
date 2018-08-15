@@ -51,6 +51,15 @@ public class Runner {
             System.out.print(s+" ");
         }
 
+        System.out.println();
+        System.out.println("-------------------------");
+        Iterator r=customArrayList.randomirator();
+
+        while (r.hasNext()){
+            String s=r.next().toString();
+            System.out.print(s+" ");
+        }
+
     }
 
 }

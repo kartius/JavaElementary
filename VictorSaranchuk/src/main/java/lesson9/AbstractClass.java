@@ -5,7 +5,7 @@ public abstract class AbstractClass {
 
     public void psrde(String str){
 
-        //TODO parse string
+
         sendStr(str);
     }
     abstract void hello();

@@ -119,7 +119,6 @@ public class CustomArrayList implements CustomList,Iterable {
                 if(array[i]==element) c=i;
             }
 
-
         }return c;
     }
 
@@ -156,5 +155,42 @@ public class CustomArrayList implements CustomList,Iterable {
 
         return invertIterator;
     }
+
+
+    public Iterator randomirator() {
+        Iterator<String> randomirator = new Iterator<String>() {
+            boolean[] check=new boolean[array.length];
+
+            @Override
+            public boolean hasNext() {
+               int count=0;
+                for(int i=0; i<array.length; i++){
+               if (check[i]==false){
+                   count++;
+               }
+               }return count>0;
+            }
+
+
+            @Override
+            public String next() {
+                Random r=new Random(System.nanoTime());
+                int index=r.nextInt(array.length);
+
+                while(check[index]==true){
+                    index=r.nextInt(array.length);
+                }
+                check[index]=true;
+                return array[index];
+
+            }
+        };
+        return randomirator;
+    }
+
+
+
+
+
 
 }

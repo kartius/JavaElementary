@@ -35,7 +35,7 @@ public void assignStudentToGroup(Group group, Student student){
 
     }
     else{
-        System.out.println(student+" can't add to group, because group is full");
+        System.out.println(student.getName()+" can't add to group, because group is full");
     }
 }
 
