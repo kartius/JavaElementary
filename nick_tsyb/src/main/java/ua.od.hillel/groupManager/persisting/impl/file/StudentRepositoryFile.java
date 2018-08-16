@@ -39,7 +39,7 @@ public class StudentRepositoryFile implements StudentRepository {
 
     @Override
     public void add(Student student) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("student.txt", true))) {
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter("student.txt", true))) {
             StringBuilder sb = new StringBuilder();
             sb.append(STUDENT_ID).append(student.getId()).append(STUDENT_ID)
                     .append(STUDENT_NAME).append(student.getName()).append(STUDENT_NAME)
@@ -54,8 +54,8 @@ public class StudentRepositoryFile implements StudentRepository {
                         .append(GROUP_IS_AVAILABLE).append(group.isAvailable()).append(GROUP_IS_AVAILABLE);
             }
             sb.append("finishLine");
-            bufferedWriter.write(sb + "\n");
-            bufferedWriter.flush();
+            printWriter.println(sb);
+            printWriter.flush();
         } catch (IOException e) {
             logger.error("Add student throws ex: ", e);
         }
