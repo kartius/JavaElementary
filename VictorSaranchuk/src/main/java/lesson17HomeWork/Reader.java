@@ -13,8 +13,9 @@ public class Reader {
         String str=null;
         try{
             fr=new FileReader(file);
+            BufferedReader br=new BufferedReader(fr);
             char c[]=new char[(int)file.length()];
-            fr.read(c);
+            br.read(c);
             str=String.copyValueOf(c);
 
         }catch (IOException e){
@@ -25,6 +26,7 @@ public class Reader {
             }catch (IOException e){
                 e.printStackTrace();
             }
+
         }
 
         return str;
