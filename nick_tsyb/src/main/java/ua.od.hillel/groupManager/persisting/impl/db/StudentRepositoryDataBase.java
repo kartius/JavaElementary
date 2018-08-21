@@ -8,6 +8,7 @@ import ua.od.hillel.groupManager.persisting.impl.db.utils.MySQLConnector;
 import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -51,6 +52,17 @@ public class StudentRepositoryDataBase implements StudentRepository {
 
     @Override
     public Student get(int id) {
-        return null;
+        Student student = null;
+        try (PreparedStatement preparedStatement = mySQLConnector.getConnection().prepareStatement("SELECT * FROM student WHERE id= ?")){
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            student = new Student();
+            student.setName(resultSet.getString("name"));
+            student.setId(id);
+        } catch (SQLException e) {
+            logger.error("Get user is wrong from db", e);
+        }
+
+        return student;
     }
 }

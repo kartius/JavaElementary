@@ -6,6 +6,7 @@ import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.model.Subject;
 import ua.od.hillel.groupManager.persisting.GroupRepository;
 import ua.od.hillel.groupManager.persisting.StudentRepository;
+import ua.od.hillel.groupManager.persisting.impl.db.StudentRepositoryDataBase;
 import ua.od.hillel.groupManager.persisting.impl.file.GroupRepositoryFile;
 import ua.od.hillel.groupManager.persisting.impl.memory.GroupRepositoryInMemory;
 import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
@@ -77,6 +78,7 @@ public class Starter {
                 studentRepository = new StudentRepositoryFile();
                 groupRepository = new GroupRepositoryFile();
             } else if (System.getenv("ENV_TYPE").equals("prod")) {
+                studentRepository = new StudentRepositoryDataBase();
                 //init db implementation
             }
         } else {
@@ -112,8 +114,6 @@ public class Starter {
 
 
         groupManager.deleteById(2);
-
-
 
 
     }
