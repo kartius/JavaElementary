@@ -21,7 +21,8 @@ public class MySQLConnector {
 
     public Connection getConnection() {
         Connection result = null;
-        try (Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
+        try  {
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             result = connection;
         } catch (SQLException e) {
             logger.error("Connection to db is wrong ",e);

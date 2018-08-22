@@ -1,8 +1,11 @@
 package ua.od.hillel.groupManager.model;
 
 import java.util.List;
+import ua.od.hillel.groupManager.model.Subject;
 
 public class SchoolClass {
+
+    private int id;
 
     private int level;
 
@@ -22,5 +25,13 @@ public class SchoolClass {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

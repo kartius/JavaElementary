@@ -32,6 +32,7 @@ public class Starter {
                 , new Subject("Languages"));
 
         SchoolClass schoolClass = new SchoolClass();
+        schoolClass.setId(1);
         schoolClass.setLevel(1);
         schoolClass.setSubjects(subjects);
 
@@ -75,8 +76,10 @@ public class Starter {
                 studentRepository = new StudentRepositoryInMemory();
                 groupRepository = new GroupRepositoryInMemory();
             } else if (System.getenv("ENV_TYPE").equals("qa")) {
-                studentRepository = new StudentRepositoryFile();
-                groupRepository = new GroupRepositoryFile();
+                studentRepository = new StudentRepositoryDataBase();
+                groupRepository = new GroupRepositoryInMemory();
+//                studentRepository = new StudentRepositoryFile();
+//                groupRepository = new GroupRepositoryFile();
             } else if (System.getenv("ENV_TYPE").equals("prod")) {
                 studentRepository = new StudentRepositoryDataBase();
                 //init db implementation
