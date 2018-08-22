@@ -2,6 +2,8 @@ package solo.groupManager.starter;
 import solo.groupManager.model.*;
 import solo.groupManager.persisting.*;
 import solo.groupManager.persisting.impl.*;
+import solo.groupManager.persisting.impl.file.GroupRepositoryFile;
+import solo.groupManager.persisting.impl.file.StudentRepositoryFile;
 import solo.groupManager.services.*;
 
 import java.util.ArrayList;
@@ -73,6 +75,23 @@ public class Starter {
 
         StudentRepository studentRepository=new StudentRepositoryInMemory();
         GroupRepository groupRepository=new GroupRepositoryInMemory();
+
+//        if (System.getenv("ENV_TYPE") != null) {
+//            System.out.println("environment is " + System.getenv("ENV_TYPE"));
+//            if (System.getenv("ENV_TYPE").equals("dev")) {
+//                studentRepository = new StudentRepositoryInMemory();
+//                groupRepository = new GroupRepositoryInMemory();
+//            } else if (System.getenv("ENV_TYPE").equals("qa")) {
+//                studentRepository = new StudentRepositoryFile();
+//                groupRepository = new GroupRepositoryFile();
+//            } else if (System.getenv("ENV_TYPE").equals("prod")) {
+//                //init db implementation
+//            }
+//        } else {
+//            System.out.println("please set env type! Now using default implementation");
+//            studentRepository = new StudentRepositoryInMemory();
+//            groupRepository = new GroupRepositoryInMemory();
+//        }
 
         StudentService studentService=new StudentService();
         studentService.setStudentRepository(studentRepository);
