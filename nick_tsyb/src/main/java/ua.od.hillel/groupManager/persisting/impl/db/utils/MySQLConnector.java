@@ -15,18 +15,17 @@ public class MySQLConnector {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            logger.error("Wrong driver",e);
+            logger.error("Wrong driver", e);
         }
     }
 
     public Connection getConnection() {
-        Connection result = null;
-        try  {
-            Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            result = connection;
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
         } catch (SQLException e) {
-            logger.error("Connection to db is wrong ",e);
+            logger.error("Connection to db is wrong ", e);
         }
-        return result;
+        return connection;
     }
 }
