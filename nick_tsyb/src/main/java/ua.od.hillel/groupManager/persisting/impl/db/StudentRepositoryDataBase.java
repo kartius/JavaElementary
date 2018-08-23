@@ -29,8 +29,7 @@ public class StudentRepositoryDataBase implements StudentRepository {
 
     @Override
     public void add(Student student) {
-        try {
-            PreparedStatement preparedStatement = mySQLConnector.getConnection().prepareStatement("INSERT INTO student (name,class_id) VALUES (?,?)");
+        try (PreparedStatement preparedStatement = mySQLConnector.getConnection().prepareStatement("INSERT INTO student (name,class_id) VALUES (?,?)")) {
             preparedStatement.setString(1, student.getName());
             preparedStatement.setInt(2, student.getSchoolClass().getId());
             preparedStatement.executeUpdate();
@@ -42,10 +41,9 @@ public class StudentRepositoryDataBase implements StudentRepository {
             for (Subject subject : student.getSchoolClass().getSubjects()) {
                 preparedStatement.setString(1, subject.getName());
                 preparedStatement.setInt(2, student.getSchoolClass().getId());
-//                preparedStatement.addBatch();
-                preparedStatement.executeUpdate();
+                preparedStatement.addBatch();
             }
-//            preparedStatement.executeBatch();
+            preparedStatement.executeBatch();
         } catch (SQLException e) {
             logger.error("Storing student in db is wrong - ", e);
         }
