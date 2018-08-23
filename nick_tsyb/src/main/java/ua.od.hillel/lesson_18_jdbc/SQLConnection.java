@@ -20,9 +20,6 @@ public class SQLConnection {
             preparedStatement.setInt(1, 45);
 
             preparedStatement.executeUpdate();
-//
-//            int resultSet = statement.executeUpdate("INSERT INTO test (id) VALUES (4)");
-//            System.out.println(resultSet);
 
             ResultSet resultSet1 = statement.executeQuery("SELECT * FROM test");
             while (resultSet1.next()) {
