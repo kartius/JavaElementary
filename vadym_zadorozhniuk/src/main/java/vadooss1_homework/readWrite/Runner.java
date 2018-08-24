@@ -11,7 +11,7 @@ import java.io.*;
 public class Runner {
     public static void main(String[] args) throws IOException, JAXBException {
         PrintWriter fileStud = new PrintWriter(new FileWriter("student.txt"));
-        fileStud.write("ID:1\nLastname:Sidorov\nFirstname:Ivan\nAge:20");
+        fileStud.write("ID:1\nLastname:Sidorov\nFirstname:Ivan\nAge:20\n");
         fileStud.close();
         File file  = new File("student_out.xml");
 
@@ -49,7 +49,7 @@ public class Runner {
 
     }
     static void readFromXML(Student student, File file) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(student.getClass());
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         student = (Student) unmarshaller.unmarshal(file);
 
