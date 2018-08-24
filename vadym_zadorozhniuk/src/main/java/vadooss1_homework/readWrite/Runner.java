@@ -13,22 +13,24 @@ public class Runner {
         PrintWriter fileStud = new PrintWriter(new FileWriter("student.txt"));
         fileStud.write("ID:1\nLastname:Sidorov\nFirstname:Ivan\nAge:20\n");
         fileStud.close();
-        File file  = new File("student_out.xml");
 
         Student student = new Student();
 
-        readFromTXT(student);
+        readFromTXT(student, "student.txt");
         System.out.println(student.toString());
 
-        writeToXML(student, file);
-        readFromXML(student, file);
+        writeToXML(student, "student_out.xml");
+        student = readFromXML("student_out.xml");
         System.out.println(student.toString());
-        writeToJSON(student);
+
+        writeToJSON(student, "student_out.json");
+        student = readFromJSON("student_out.json");
+        System.out.println(student.toString());
 
     }
 
-    static void readFromTXT(Student student) throws IOException {
-        BufferedReader readStud = new BufferedReader(new FileReader("student.txt"));
+    static void readFromTXT(Student student, String filename) throws IOException {
+        BufferedReader readStud = new BufferedReader(new FileReader(filename));
         String str;
         str=readStud.readLine();
         student.setId(Integer.parseInt(str.substring(str.indexOf(":")+1).trim()));
@@ -41,25 +43,34 @@ public class Runner {
         readStud.close();
     }
 
-    static void writeToXML(Student student, File file) throws JAXBException {
+    static void writeToXML(Student student, String filename) throws JAXBException {
+        File file  = new File(filename);
         JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(student, file);
 
     }
-    static void readFromXML(Student student, File file) throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(student.getClass());
+    static Student readFromXML(String filename) throws JAXBException {
+        File file  = new File(filename);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Student.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-        student = (Student) unmarshaller.unmarshal(file);
+        return (Student) unmarshaller.unmarshal(file);
 
     }
-    static void writeToJSON(Student student) throws IOException {
+    static void writeToJSON(Student student, String filename) throws IOException {
         Gson json = new Gson();
-        FileWriter fileWriter = new FileWriter("student_out.json");
+        FileWriter fileWriter = new FileWriter(filename);
         json.toJson(student, fileWriter);
         fileWriter.close();
 
+    }
+    static Student readFromJSON(String filename) throws IOException {
+        Gson json = new Gson();
+        FileReader fileReader = new FileReader(filename);
+        Student student = json.fromJson(fileReader, Student.class);
+        fileReader.close();
+        return student;
     }
 
 }
