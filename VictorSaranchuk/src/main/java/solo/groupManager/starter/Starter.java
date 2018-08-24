@@ -1,9 +1,8 @@
 package solo.groupManager.starter;
 import solo.groupManager.model.*;
 import solo.groupManager.persisting.*;
-import solo.groupManager.persisting.impl.*;
-import solo.groupManager.persisting.impl.file.GroupRepositoryFile;
-import solo.groupManager.persisting.impl.file.StudentRepositoryFile;
+import solo.groupManager.persisting.impl.memory.GroupRepositoryInMemory;
+import solo.groupManager.persisting.impl.memory.StudentRepositoryInMemory;
 import solo.groupManager.services.*;
 
 import java.util.ArrayList;
@@ -125,7 +124,7 @@ public class Starter {
         specialClass.add(student1);
 
 
-        System.out.println(groupManager.getAmountOfAvailableGrous());
+        System.out.println(groupManager.getAmountOfAvailableGroups());
 
 
 

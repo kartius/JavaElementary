@@ -4,15 +4,11 @@ import solo.groupManager.model.Group;
 import solo.groupManager.model.SchoolClass;
 import solo.groupManager.model.Student;
 import solo.groupManager.model.Subject;
-import solo.groupManager.persisting.GroupRepository;
 import solo.groupManager.persisting.StudentRepository;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -27,47 +23,20 @@ public class StudentRepositoryFile implements StudentRepository {
     private final static String GROUP_ID="group_id";
     private final static String GROUP_SUBJECT_NAME="group_subject_name";
     private final static String GROUP_IS_AVAILABLE="is_available";
+    private final static String GROUPS_LIST="groups_list";
+    private final static String GROUP_ONE="group_one";
 
 
     @Override
-    public int getLevelClassOfStudent(Student student) throws Exception {
-//        int levelClassOfStudent=0;
-//        try(BufferedReader bufferedReader=new BufferedReader(new FileReader("students.txt"))) {
-//            String currentLine;
-//            //Read all students from file to LinkedList
-//            List<String> students = new LinkedList<>();
-//            while ((currentLine = bufferedReader.readLine()) != null) {
-//                students.add(currentLine);
-//            }
-//            //Search student by ID in LinkedList
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(STUDENT_ID).append(student.getId()).append(STUDENT_ID);
-//            for(int i=0; i<students.size();i++){
-//                if(students.get(i).contains(sb)){
-//                    String[] st=students.get(i).split(CLASS_LEVEL);
-//                    if(st.length==3){
-//                    levelClassOfStudent=Integer.valueOf(st[1]);
-//                    }
-//                }
-//            }
-//        }
-//        return levelClassOfStudent;
-        if(get(student.getId()).getId()==student.getId()){
-            return get(student.getId()).getSchoolClass().getLevel();
-        }
-        else return 0;
+    public int getLevelClassOfStudent(Student student) {
+        Student student1=get(student.getId());
+        return student1.getSchoolClass().getLevel();
     }
 
     @Override
     public List<Subject> getAllSubjects(Student student) {
-        List<Subject> allSubjects = new ArrayList<Subject>();
-        allSubjects.addAll(get(student.getId()).getSchoolClass().getSubjects());
-        for(Group group:get(student.getId()).getGroups()){
-            if(group.isAvailable()){
-                allSubjects.add(group.getSubject());
-            }
-        }
-        return allSubjects;
+        Student student1=get(student.getId());
+        return student1.getSchoolClass().getSubjects();
     }
 
     @Override
@@ -80,13 +49,13 @@ public class StudentRepositoryFile implements StudentRepository {
             for (Subject subject:student.getSchoolClass().getSubjects()){
                 sb.append(SUBJECT_NAME).append(subject.getName()).append(SUBJECT_NAME);
             }
-            sb.append(SUBJECTS_LIST);
+            sb.append(SUBJECTS_LIST).append(GROUPS_LIST);
             for(Group group:student.getGroups()){
-                sb.append(GROUP_ID).append(group.getId()).append(GROUP_ID)
+                sb.append(GROUP_ONE).append(GROUP_ID).append(group.getId()).append(GROUP_ID)
                         .append(GROUP_SUBJECT_NAME).append(group.getSubject().getName()).append(GROUP_SUBJECT_NAME)
-                        .append(GROUP_IS_AVAILABLE).append(group.isAvailable()).append(GROUP_IS_AVAILABLE);
+                        .append(GROUP_IS_AVAILABLE).append(group.isAvailable()).append(GROUP_IS_AVAILABLE).append(GROUP_ONE);
             }
-            sb.append("finishLine");
+            sb.append(GROUPS_LIST).append("finishLine");
             printWriter.println(sb);
             printWriter.flush();
         }catch (IOException e){
@@ -96,37 +65,49 @@ public class StudentRepositoryFile implements StudentRepository {
 
     @Override
     public void delete(int id) {
+        List<String> studentsString=new ArrayList<>();
         try(BufferedReader bufferedReader=new BufferedReader(new FileReader("students.txt"))){
             String currentLine;
-            //Read all students from file to LinkedList
-            List<String> students=new LinkedList<>();
             while((currentLine=bufferedReader.readLine())!=null){
-                students.add(currentLine);
-            }
-            //Search student by ID in LinkedList
-            StringBuilder sb=new StringBuilder();
-            sb.append(STUDENT_ID).append(String.valueOf(id)).append(STUDENT_ID);
-            for(int i=0;i<students.size();i++){
-                if(students.get(i).contains(sb)){
-                    students.remove(i);
+                if(!(getValue(STUDENT_ID,currentLine).equals(String.valueOf(id)))){
+                    studentsString.add(currentLine);
                 }
             }
-            //write changes in LinkedList to the file
-            PrintWriter pr=new PrintWriter(new FileWriter("students.txt"),true);
-            for(int i=0;i<students.size();i++){
-                pr.println(students.get(i));
+        }catch (IOException e){
+            logger.error("Delete student throws ex: "+e);
+        }
+        try(PrintWriter printWriter=new PrintWriter(new FileWriter("students.txt"))){
+            for (String student:studentsString
+                 ) {
+                printWriter.println(student);
             }
-            pr.flush();
-        } catch (IOException e) {
-            logger.error("Delete student throws ex "+e);
+            printWriter.flush();
+        }catch (IOException e){
+            logger.error("Delete student throws ex: "+e);
         }
     }
 
     @Override
     public void update(Student student) {
-        if(get(student.getId()).getId()==student.getId()) {
-        delete(student.getId());
+        int id=student.getId();
+        delete(id);
         add(student);
+        List<Integer> students_id=new ArrayList<>();
+        try(BufferedReader bufferedReader=new BufferedReader(new FileReader("students.txt"))){
+            String currentLine;
+            while((currentLine=bufferedReader.readLine())!=null){
+                    students_id.add(Integer.valueOf(getValue(STUDENT_ID,currentLine)));
+            }
+            for (int student_id :students_id) {
+                Student student1;
+                student1=get(student_id);
+                delete(student_id);
+                add(student1);
+            }
+
+        }
+        catch (IOException e){
+            logger.error("Update student throws ex: "+e);
         }
     }
 
@@ -137,12 +118,13 @@ public class StudentRepositoryFile implements StudentRepository {
             String currentLine;
             while((currentLine=bufferedReader.readLine())!=null){
                 if(getValue(STUDENT_ID,currentLine).equals(String.valueOf(id))){
+                    student.setId(id);
                     student.setName(getValue(STUDENT_NAME, currentLine));
                     SchoolClass schoolClass=new SchoolClass();
                     schoolClass.setLevel(Integer.valueOf(getValue(CLASS_LEVEL, currentLine)));
                     student.setSchoolClass(schoolClass);
-                    String subjets_list=getValue(SUBJECTS_LIST,currentLine);
-                    String[] subject_names=getValues(SUBJECT_NAME, subjets_list);
+                    String subjects_list=getValue(SUBJECTS_LIST,currentLine);
+                    String[] subject_names=getValues(SUBJECT_NAME, subjects_list);
                     List<Subject> subjects=new ArrayList<>();
                     for(String subjectName:subject_names){
                         if(!subjectName.isEmpty()){
@@ -151,6 +133,19 @@ public class StudentRepositoryFile implements StudentRepository {
                         }
                     }
                     student.getSchoolClass().setSubjects(subjects);
+                    String groups_list=getValue(GROUPS_LIST, currentLine);
+                    String[] groupsString=getValues(GROUP_ONE,groups_list);
+                    List<Group> groups=new ArrayList<>();
+                    for (String group:groupsString){
+                        if(!group.isEmpty()){
+                            Group group1=new Group();
+                            group1.setId(Integer.valueOf(getValue(GROUP_ID,group)));
+                            Subject subject=new Subject(GROUP_SUBJECT_NAME);
+                            group1.setSubject(subject);
+                            groups.add(group1);
+                        }
+                    }
+
                     break;
                 }
             }
@@ -169,7 +164,8 @@ public class StudentRepositoryFile implements StudentRepository {
     }
 
     private String[] getValues(String value, String target) {
-        String[] values = target.split(value);
-        return values;
+        String[] values=target.split(value);
+    return values;
     }
+
 }

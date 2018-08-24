@@ -21,7 +21,7 @@ public Group getById(int id){
     return groupRepository.get(id);
 }
 
-public int getAmountOfAvailableGrous(){
+public int getAmountOfAvailableGroups(){
     return groupRepository.getAmountofAvailableGroups();
 }
 
