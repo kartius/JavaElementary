@@ -6,20 +6,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Student {
-    @XmlElement
+
     private int id;
-    @XmlElement
     private String lastname;
-    @XmlElement
     private String firstname;
-    @XmlElement
     private int age;
 
 
     public int getId() {
         return id;
     }
-
+    @XmlElement
     public void setId(int id) {
         this.id = id;
     }
@@ -27,7 +24,7 @@ public class Student {
     public String getLastname() {
         return lastname;
     }
-
+    @XmlElement
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
@@ -35,7 +32,7 @@ public class Student {
     public String getFirstname() {
         return firstname;
     }
-
+    @XmlElement
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
@@ -43,7 +40,7 @@ public class Student {
     public int getAge() {
         return age;
     }
-
+    @XmlElement
     public void setAge(int age) {
         this.age = age;
     }
