@@ -1,6 +1,8 @@
 package ua.od.hillel.groupManager.persisting.impl.db.utils;
 
 import org.apache.log4j.Logger;
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.apache.tomcat.jdbc.pool.PoolProperties;
 
 import java.sql.*;
 
@@ -11,18 +13,19 @@ import static ua.od.hillel.groupManager.config.ApplicationConfig.dbUser;
 public class MySQLConnector {
     final static Logger logger = Logger.getLogger(MySQLConnector.class);
 
-    public MySQLConnector() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            logger.error("Wrong driver", e);
-        }
-    }
-
     public Connection getConnection() {
+        PoolProperties p = new PoolProperties();
+        p.setUrl(dbUrl);
+        p.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        p.setUsername(dbUser);
+        p.setPassword(dbPassword);
+        p.setMaxActive(100);
+        p.setInitialSize(10);
+        DataSource datasource = new DataSource();
+        datasource.setPoolProperties(p);
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            connection = datasource.getConnection();
         } catch (SQLException e) {
             logger.error("Connection to db is wrong ", e);
         }
