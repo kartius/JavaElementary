@@ -15,8 +15,13 @@ import java.util.List;
 
 public class StudentRepositoryDataBase implements StudentRepository {
 
-    private MySQLConnector mySQLConnector = new MySQLConnector();
+    private MySQLConnector mySQLConnector;
     final static Logger logger = Logger.getLogger(StudentRepositoryDataBase.class);
+
+
+    public StudentRepositoryDataBase(MySQLConnector mySQLConnector) {
+        this.mySQLConnector = mySQLConnector;
+    }
 
     @Override
     public int getLevelClassOfStudent(Student student) throws Exception {
