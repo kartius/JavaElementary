@@ -7,6 +7,7 @@ import ua.od.hillel.groupManager.model.Subject;
 import ua.od.hillel.groupManager.persisting.GroupRepository;
 import ua.od.hillel.groupManager.persisting.StudentRepository;
 import ua.od.hillel.groupManager.persisting.impl.db.StudentRepositoryDataBase;
+import ua.od.hillel.groupManager.persisting.impl.db.utils.MySQLConnector;
 import ua.od.hillel.groupManager.persisting.impl.file.GroupRepositoryFile;
 import ua.od.hillel.groupManager.persisting.impl.memory.GroupRepositoryInMemory;
 import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
@@ -32,6 +33,7 @@ public class Starter {
                 , new Subject("Languages"));
 
         SchoolClass schoolClass = new SchoolClass();
+        schoolClass.setId(1);
         schoolClass.setLevel(1);
         schoolClass.setSubjects(subjects);
 
@@ -75,10 +77,12 @@ public class Starter {
                 studentRepository = new StudentRepositoryInMemory();
                 groupRepository = new GroupRepositoryInMemory();
             } else if (System.getenv("ENV_TYPE").equals("qa")) {
-                studentRepository = new StudentRepositoryFile();
-                groupRepository = new GroupRepositoryFile();
+                studentRepository = new StudentRepositoryDataBase(new MySQLConnector());
+                groupRepository = new GroupRepositoryInMemory();
+//                studentRepository = new StudentRepositoryFile();
+//                groupRepository = new GroupRepositoryFile();
             } else if (System.getenv("ENV_TYPE").equals("prod")) {
-                studentRepository = new StudentRepositoryDataBase();
+                studentRepository = new StudentRepositoryDataBase(new MySQLConnector());
                 //init db implementation
             }
         } else {

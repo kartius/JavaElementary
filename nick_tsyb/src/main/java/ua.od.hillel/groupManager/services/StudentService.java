@@ -16,21 +16,20 @@ public class StudentService {
         studentRepository.add(student);
     }
 
+    public void update(Student student) {
+        studentRepository.update(student);
+    }
+
     public Student getById(int id) {
         return studentRepository.get(id);
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         studentRepository.delete(id);
     }
 
-    public int getLevelClassOfStudent(Student student) {
-        try {
-            return studentRepository.getLevelClassOfStudent(student);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public int getLevelClassOfStudent(Student student) throws Exception {
+        return studentRepository.getLevelClassOfStudent(student);
     }
 
     public List<Subject> getAllSubjects(Student student) {

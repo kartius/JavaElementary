@@ -6,6 +6,7 @@ import ua.od.hillel.groupManager.model.Subject;
 import ua.od.hillel.groupManager.persisting.StudentRepository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StudentRepositoryInMemory implements StudentRepository {
@@ -43,9 +44,10 @@ public class StudentRepositoryInMemory implements StudentRepository {
 
     @Override
     public void delete(int id) {
-        for (Student student : students) {
-            if (student.getId() == id) {
-                students.remove(student);
+        Iterator<Student> iterator = students.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getId() == id) {
+                iterator.remove();
             }
         }
     }
