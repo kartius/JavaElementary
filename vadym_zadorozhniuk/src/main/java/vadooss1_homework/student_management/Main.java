@@ -22,11 +22,12 @@ public class Main {
         groupManager.setGroupRepository(groupRepository);
         Gson json = new Gson();
 
-        SpecialClass specialClass = new SpecialClass();
-
         Subject java = new Subject("Java");
         Subject english = new Subject("English");
         Subject dataBase = new Subject("DataBases");
+        Subject html = new Subject("HTML");
+
+        SpecialClass specialClass = new SpecialClass(html);
 
         Student vasya = new Student("Vasya",1);
         Student petya = new Student("Petya",2);

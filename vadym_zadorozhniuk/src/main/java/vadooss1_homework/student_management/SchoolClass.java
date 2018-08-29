@@ -9,7 +9,8 @@ public class SchoolClass {
      LinkedList<Subject> subjects = new LinkedList<>();
      LinkedList<Student> students = new LinkedList<>();
 
-    public SchoolClass(){}
+    public SchoolClass(){
+    }
 
     public SchoolClass(int classLevel){
         this.classLevel = classLevel;

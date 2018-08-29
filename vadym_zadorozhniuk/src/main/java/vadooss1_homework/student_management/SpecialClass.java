@@ -5,7 +5,11 @@ import java.util.LinkedList;
 public class SpecialClass extends SchoolClass {
     LinkedList<Student> students = new LinkedList<>();
 
-    Subject subject = new Subject("HTML");
+    Subject subject;
+
+    public SpecialClass(Subject subject){
+        this.subject = subject;
+    }
 
     public void addStudent(Student student){
         students.addLast(student);
