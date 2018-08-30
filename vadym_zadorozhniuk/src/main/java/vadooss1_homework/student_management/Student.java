@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Student {
      public int id;
-     String name;
+    public String name;
     public int schoolClassLevel;
     public LinkedList<Integer> groups = new LinkedList<>();
     public LinkedList<Subject> subjects = new LinkedList<>();

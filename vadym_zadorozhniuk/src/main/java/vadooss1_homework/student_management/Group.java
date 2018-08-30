@@ -4,9 +4,11 @@ import java.util.LinkedList;
 
 public class Group {
     public int id;
-    public Subject subject;
+    public Subject subject = new Subject();
      LinkedList<Student> students = new LinkedList<>();
-     boolean hasThreeStudents;
+     public boolean hasThreeStudents;
+
+     public Group(){}
 
     public Group(Subject subject, int id) {
         this.subject = subject;
