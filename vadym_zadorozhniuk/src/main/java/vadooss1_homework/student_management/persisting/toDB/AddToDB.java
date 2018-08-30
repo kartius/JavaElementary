@@ -78,8 +78,9 @@ public class AddToDB {
 
     public static void studentIntoClass(Student student, int id_schoolClass){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `student` SET  fk_id_schoolClass = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `student` SET  fk_id_schoolClass = ? WHERE id = ?");
             preparedStatement.setInt(1, id_schoolClass);
+            preparedStatement.setInt(2, student.id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             preparedStatement = connection.prepareStatement("SELECT classLevel FROM `schoolclass` WHERE id = ?");
@@ -94,8 +95,9 @@ public class AddToDB {
 
     public static void studentInSpecialclass(Student student, int id_specialClass){
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `student` SET  fk_id_specialClass = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `student` SET  fk_id_specialClass = ? WHERE id = ?");
             preparedStatement.setInt(1, id_specialClass);
+            preparedStatement.setInt(2, student.id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             preparedStatement = connection.prepareStatement("SELECT fk_id_subject FROM `specialclass` WHERE id = ?");

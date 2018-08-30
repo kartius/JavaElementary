@@ -100,7 +100,6 @@ public class Main {
         groupManager.add(group1);
         groupManager.add(group2);
 
-        System.out.println(json.toJson(groupManager.get(1)));
 
         groupManager.assignStudentToGroup(group1,vasya);
         groupManager.assignStudentToGroup(group2,vasya);
@@ -110,6 +109,7 @@ public class Main {
 
         System.out.println(groupManager.getAmountOfAvailableGroups());
         System.out.println(json.toJson(studentService.getAllSubjects(vasya)));
+        System.out.println(json.toJson(groupManager.get(1)));
         System.out.println(json.toJson(groupManager.get(2)));
 
 

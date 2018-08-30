@@ -113,8 +113,9 @@ public class GroupRepositoryInDB implements GroupRepository {
         student.groups.add(group.id);
         student.subjects.add(group.subject);
         group.addStudent(student);
-        preparedStatement = connection.prepareStatement("UPDATE `group` SET  hasThreeStudents = ?");
+        preparedStatement = connection.prepareStatement("UPDATE `group` SET  hasThreeStudents = ? WHERE id = ?");
         preparedStatement.setString(1,String.valueOf(group.isAvailable()));
+        preparedStatement.setInt(2,group.id);
         preparedStatement.executeUpdate();
         preparedStatement.close();
 
