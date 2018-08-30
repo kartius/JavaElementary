@@ -88,7 +88,6 @@ public class Starter {
                 studentRepository = new StudentRepositoryFile();
                 groupRepository = new GroupRepositoryFile();
             } else if (System.getenv("ENV_TYPE").equals("prod")) {
-                //init db implementation
                 studentRepository=new StudentRepositoryDataBase();
                 groupRepository=new GroupRepositoryDataBase();
             }
