@@ -7,6 +7,10 @@ import ua.od.hillel.groupManager.persisting.StudentRepository;
 import ua.od.hillel.groupManager.persisting.impl.db.utils.MySQLConnector;
 import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,6 +73,27 @@ public class StudentRepositoryDataBase implements StudentRepository {
 
     @Override
     public Student get(int id) {
+
+        Context initContext = null;
+        try {
+            initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
+            Connection conn = ds.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM student WHERE id= ?");
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    logger.info("JNDI student name - "+resultSet.getString("name"));
+                    logger.info("JNDI student id - "+resultSet.getInt("id"));
+                }
+            }
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         Student student = null;
         try (Connection connection = mySQLConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM student WHERE id= ?")) {
