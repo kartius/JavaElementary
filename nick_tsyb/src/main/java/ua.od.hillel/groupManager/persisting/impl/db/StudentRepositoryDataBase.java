@@ -39,26 +39,28 @@ public class StudentRepositoryDataBase implements StudentRepository {
 
     @Override
     public void add(Student student) {
-        try (Connection connection = mySQLConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO student (name,class_id) VALUES (?,?)")) {
-            preparedStatement.setString(1, student.getName());
-            preparedStatement.setInt(2, student.getSchoolClass().getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            logger.error("Storing student in db is wrong - ", e);
-        }
-        try (Connection connection = mySQLConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO subject (name,school_class_id) VALUES (?,?)")) {
-            for (Subject subject : student.getSchoolClass().getSubjects()) {
-                preparedStatement.setString(1, subject.getName());
-                preparedStatement.setInt(2, student.getSchoolClass().getId());
-                preparedStatement.addBatch();
-            }
-            preparedStatement.executeBatch();
-        } catch (SQLException e) {
-            logger.error("Storing student in db is wrong - ", e);
-        }
 
+        Context initContext = null;
+        try {
+            initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
+            try (Connection conn = ds.getConnection();
+                 PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO student (name,class_id) VALUES (?,?)")) {
+                preparedStatement.setString(1, student.getName());
+                preparedStatement.setInt(2, student.getSchoolClass().getId());
+                preparedStatement.executeUpdate();
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            if (initContext != null) {
+                try {
+                    initContext.close();
+                } catch (NamingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
@@ -75,6 +77,7 @@ public class StudentRepositoryDataBase implements StudentRepository {
     public Student get(int id) {
 
         Context initContext = null;
+        Student student = null;
         try {
             initContext = new InitialContext();
             DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
@@ -83,8 +86,11 @@ public class StudentRepositoryDataBase implements StudentRepository {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    logger.info("JNDI student name - "+resultSet.getString("name"));
-                    logger.info("JNDI student id - "+resultSet.getInt("id"));
+                    logger.info("JNDI student name - " + resultSet.getString("name"));
+                    logger.info("JNDI student id - " + resultSet.getInt("id"));
+                    student = new Student();
+                    student.setName(resultSet.getString("name"));
+                    student.setId(id);
                 }
             }
         } catch (NamingException e) {
@@ -94,20 +100,19 @@ public class StudentRepositoryDataBase implements StudentRepository {
         }
 
 
-        Student student = null;
-        try (Connection connection = mySQLConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM student WHERE id= ?")) {
-            preparedStatement.setInt(1, id);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    student = new Student();
-                    student.setName(resultSet.getString("name"));
-                    student.setId(id);
-                }
-            }
-        } catch (SQLException e) {
-            logger.error("Get user is wrong from db", e);
-        }
+//        try (Connection connection = mySQLConnector.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM student WHERE id= ?")) {
+//            preparedStatement.setInt(1, id);
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                while (resultSet.next()) {
+//                    student = new Student();
+//                    student.setName(resultSet.getString("name"));
+//                    student.setId(id);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            logger.error("Get user is wrong from db", e);
+//        }
 
         return student;
     }

@@ -19,8 +19,8 @@ public class MySQLConnector {
         p.setDriverClassName("com.mysql.cj.jdbc.Driver");
         p.setUsername(dbUser);
         p.setPassword(dbPassword);
-        p.setMaxActive(100);
-        p.setInitialSize(10);
+        p.setMaxAge(100);
+        p.setInitialSize(100);
         DataSource datasource = new DataSource();
         datasource.setPoolProperties(p);
         Connection connection = null;

@@ -1,6 +1,7 @@
 package ua.od.hillel.groupManager.controller;
 
 
+import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.persisting.impl.db.StudentRepositoryDataBase;
@@ -26,15 +27,31 @@ public class StudentController extends HttpServlet {
     StudentService studentService = new StudentService();
     final static Logger logger = Logger.getLogger(StudentController.class);
 
+    public StudentController() {
+        studentService.setStudentRepository(new StudentRepositoryDataBase(new MySQLConnector()));
+    }
+
     @Override
     protected void doGet(HttpServletRequest reqest, HttpServletResponse response)
             throws ServletException, IOException {
-        studentService.setStudentRepository(new StudentRepositoryDataBase(new MySQLConnector()));
-        String id = reqest.getParameter("id");
-        response.getWriter().println("Hello World! " + id);
-        Student student = studentService.getById(Integer.valueOf(id));
-        logger.info("JDBC connection student name - " + student.getName());
-        logger.info("JDBC connection student id  - " + student.getId());
+        try {
+            String id = reqest.getParameter("id");
+            Student student = studentService.getById(Integer.valueOf(id));
+            logger.info("JDBC connection student name - " + student.getName());
+            logger.info("JDBC connection student id  - " + student.getId());
+            Gson gson = new Gson();
+            response.getWriter().println(gson.toJson(student));
+        } catch (Exception e) {
+            logger.error(e);
+            response.getWriter().println("Server internal error");
+            response.setStatus(503);
+        }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Gson gson = new Gson();
+        Student student = gson.fromJson(req.getReader(), Student.class);
+        studentService.add(student);
+    }
 }
