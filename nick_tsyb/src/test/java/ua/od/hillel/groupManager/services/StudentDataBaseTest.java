@@ -20,7 +20,7 @@ public class StudentDataBaseTest {
     public void setUp() throws SQLException {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
-        Mockito.when(resultSet.getInt(1)).thenReturn(1);
+        Mockito.when(resultSet.getInt("id")).thenReturn(1);
         Mockito.when(resultSet.getString("name")).thenReturn("test");
 
         PreparedStatement statement = Mockito.mock(PreparedStatement.class);

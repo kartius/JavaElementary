@@ -1,44 +1,44 @@
 package solo;
 
 
-import java.util.Arrays;
-import java.util.Random;
+import java.io.*;
+import java.util.LinkedList;
 
 public class LearningTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        File file=new File ("test.txt");
+        PrintWriter pr = new PrintWriter(new FileWriter(file.getName(), true));
+        String j="00";
+        String s = j+"12345end";
+        StringBuilder sb=new StringBuilder();
+        sb.append(s).append("11");
+        pr.println(sb);
+        pr.println("9end");
+        pr.println(sb);
+        pr.flush();
 
-        String[] arr={"1","2","3","4","5"};
-        LearningTest.shuffle(arr);
+        BufferedReader br=new BufferedReader(new FileReader(file.getName()));
+            LinkedList<String> ll=new LinkedList<>();
+            String s1;
+            while ((s1=br.readLine())!=null){
+                ll.add(s1);
+            }
+            for (int i=0; i<ll.size();i++) {
+                if (ll.get(i).contains("9")) ll.remove(i);
+            }
 
-        for (String s:arr
+            PrintWriter pr1=new PrintWriter(new FileWriter(file.getName()));
+        for (int i=0; i<ll.size();i++){
+            pr1.println(ll.get(i));
+        }
+            pr1.flush();
+
+        for (String l:ll
              ) {
-            System.out.print(s+" ");
+            System.out.println(l);
         }
 
-        boolean[] c=new boolean[5];
-        for (boolean b:c
-             ) {
-            System.out.println(b);
-        }
 
     }
-
-
-    public  static void shuffle(String[] array){
-        Random random=new Random(System.nanoTime());
-        for(int i=0; i<array.length; i++){
-        swap(array, i, random.nextInt(array.length));
-        }
-    }
-
-    public static void swap(String[] arr, int i, int j){
-        String tmp=arr[i];
-        arr[i]=arr[j];
-        arr[j]=tmp;
-    }
-
-
-
-
-
 }
+

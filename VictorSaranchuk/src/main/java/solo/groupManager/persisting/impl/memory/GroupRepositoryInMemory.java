@@ -1,4 +1,4 @@
-package solo.groupManager.persisting.impl;
+package solo.groupManager.persisting.impl.memory;
 import solo.groupManager.model.Group;
 import solo.groupManager.model.Student;
 import solo.groupManager.persisting.GroupRepository;
