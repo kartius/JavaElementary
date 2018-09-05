@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.model.Subject;
 import ua.od.hillel.groupManager.persisting.StudentRepository;
+import ua.od.hillel.groupManager.persisting.impl.db.utils.DBConnector;
 import ua.od.hillel.groupManager.persisting.impl.db.utils.MySQLConnector;
 import ua.od.hillel.groupManager.persisting.impl.file.StudentRepositoryFile;
 
@@ -19,12 +20,12 @@ import java.util.List;
 
 public class StudentRepositoryDataBase implements StudentRepository {
 
-    private MySQLConnector mySQLConnector;
+    private DBConnector dbConnector;
     final static Logger logger = Logger.getLogger(StudentRepositoryDataBase.class);
 
 
-    public StudentRepositoryDataBase(MySQLConnector mySQLConnector) {
-        this.mySQLConnector = mySQLConnector;
+    public StudentRepositoryDataBase(DBConnector dbConnector) {
+        this.dbConnector = dbConnector;
     }
 
     @Override
@@ -39,12 +40,8 @@ public class StudentRepositoryDataBase implements StudentRepository {
 
     @Override
     public void add(Student student) {
-
-        Context initContext = null;
         try {
-            initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
-            try (Connection conn = ds.getConnection();
+            try (Connection conn = dbConnector.getConnection();
                  PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO student (name,class_id) VALUES (?,?)")) {
                 preparedStatement.setString(1, student.getName());
                 preparedStatement.setInt(2, student.getSchoolClass().getId());
@@ -52,14 +49,6 @@ public class StudentRepositoryDataBase implements StudentRepository {
             }
         } catch (Exception e) {
             logger.error(e);
-        } finally {
-            if (initContext != null) {
-                try {
-                    initContext.close();
-                } catch (NamingException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -76,13 +65,9 @@ public class StudentRepositoryDataBase implements StudentRepository {
     @Override
     public Student get(int id) {
 
-        Context initContext = null;
         Student student = null;
-        try {
-            initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
-            Connection conn = ds.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM student WHERE id= ?");
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM student WHERE id= ?")) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -93,26 +78,9 @@ public class StudentRepositoryDataBase implements StudentRepository {
                     student.setId(id);
                 }
             }
-        } catch (NamingException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-//        try (Connection connection = mySQLConnector.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM student WHERE id= ?")) {
-//            preparedStatement.setInt(1, id);
-//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//                while (resultSet.next()) {
-//                    student = new Student();
-//                    student.setName(resultSet.getString("name"));
-//                    student.setId(id);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            logger.error("Get user is wrong from db", e);
-//        }
 
         return student;
     }

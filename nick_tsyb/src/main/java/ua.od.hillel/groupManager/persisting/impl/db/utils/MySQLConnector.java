@@ -10,9 +10,10 @@ import static ua.od.hillel.groupManager.config.ApplicationConfig.dbPassword;
 import static ua.od.hillel.groupManager.config.ApplicationConfig.dbUrl;
 import static ua.od.hillel.groupManager.config.ApplicationConfig.dbUser;
 
-public class MySQLConnector {
+public class MySQLConnector implements DBConnector{
     final static Logger logger = Logger.getLogger(MySQLConnector.class);
 
+    @Override
     public Connection getConnection() {
         PoolProperties p = new PoolProperties();
         p.setUrl(dbUrl);

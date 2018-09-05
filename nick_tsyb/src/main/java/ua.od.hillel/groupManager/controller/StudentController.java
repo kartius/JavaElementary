@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import ua.od.hillel.groupManager.model.Student;
 import ua.od.hillel.groupManager.persisting.impl.db.StudentRepositoryDataBase;
+import ua.od.hillel.groupManager.persisting.impl.db.utils.JNDIConnector;
 import ua.od.hillel.groupManager.persisting.impl.db.utils.MySQLConnector;
 import ua.od.hillel.groupManager.services.StudentService;
 
@@ -28,7 +29,11 @@ public class StudentController extends HttpServlet {
     final static Logger logger = Logger.getLogger(StudentController.class);
 
     public StudentController() {
-        studentService.setStudentRepository(new StudentRepositoryDataBase(new MySQLConnector()));
+        try {
+            studentService.setStudentRepository(new StudentRepositoryDataBase(new JNDIConnector()));
+        } catch (NamingException e) {
+            logger.error(e);
+        }
     }
 
     @Override
@@ -37,8 +42,6 @@ public class StudentController extends HttpServlet {
         try {
             String id = reqest.getParameter("id");
             Student student = studentService.getById(Integer.valueOf(id));
-            logger.info("JDBC connection student name - " + student.getName());
-            logger.info("JDBC connection student id  - " + student.getId());
             Gson gson = new Gson();
             response.getWriter().println(gson.toJson(student));
         } catch (Exception e) {
