@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_16;
+package ua.od.hillel.lesson_16_serialization;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

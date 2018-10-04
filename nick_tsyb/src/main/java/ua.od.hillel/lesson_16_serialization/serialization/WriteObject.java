@@ -1,6 +1,5 @@
-package ua.od.hillel.lesson_16.serialization;
+package ua.od.hillel.lesson_16_serialization.serialization;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;

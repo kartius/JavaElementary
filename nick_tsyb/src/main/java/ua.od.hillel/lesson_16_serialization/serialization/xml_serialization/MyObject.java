@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_16.serialization.xml_serialization;
+package ua.od.hillel.lesson_16_serialization.serialization.xml_serialization;
 
 import java.util.List;
 

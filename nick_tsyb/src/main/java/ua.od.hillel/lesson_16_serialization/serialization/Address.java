@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_16.serialization;
+package ua.od.hillel.lesson_16_serialization.serialization;
 
 import java.io.Serializable;
 
