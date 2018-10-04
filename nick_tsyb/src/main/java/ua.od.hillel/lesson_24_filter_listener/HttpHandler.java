@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_filter_listener;
+package ua.od.hillel.lesson_24_filter_listener;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

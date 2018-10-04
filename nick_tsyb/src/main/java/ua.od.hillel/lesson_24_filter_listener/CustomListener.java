@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_filter_listener;
+package ua.od.hillel.lesson_24_filter_listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
