@@ -1,4 +1,4 @@
-package ua.od.hillel.lesson_17;
+package ua.od.hillel.lesson_17_io_streams;
 
 import java.io.*;
 
