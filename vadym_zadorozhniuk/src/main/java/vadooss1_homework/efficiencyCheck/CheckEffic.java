@@ -19,7 +19,7 @@ public class CheckEffic {
         arrayListAddLast(arrayList);
         System.out.println("warm");
         arrayListAddLast(arrayList);
-        System.out.println(arrayList);
+        System.out.println(arrayList.indexOf(0));
 
 
     }
