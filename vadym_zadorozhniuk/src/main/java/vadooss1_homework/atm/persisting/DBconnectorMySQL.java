@@ -129,6 +129,11 @@ public class DBconnectorMySQL {
                     "ENGINE = InnoDB\n" +
                     "DEFAULT CHARACTER SET = utf8\n" +
                     "COLLATE = utf8_bin");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('get cash')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('transfer money')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance on screen')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance in SMS')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance print')");
 
             statement.close();
         } catch (SQLException e) {
