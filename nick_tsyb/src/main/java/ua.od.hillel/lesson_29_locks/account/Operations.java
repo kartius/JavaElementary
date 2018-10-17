@@ -7,16 +7,20 @@ public class Operations {
 
         try {
             if (a1.getLock().tryLock()) {
-                if (a2.getLock().tryLock()) {
-                    if (a1.getBalance() < amount) {
-                        throw new Exception("operation unsupported");
-                    }
+                try {
+                    if (a2.getLock().tryLock()) {
+                        if (a1.getBalance() < amount) {
+                            throw new Exception("operation unsupported");
+                        }
 
-                    a1.withdraw(amount);
-                    a2.deposit(amount);
-                } else {
-                    a2.incFailedCounter();
-                    System.out.println("failed lock");
+                        a1.withdraw(amount);
+                        a2.deposit(amount);
+                    } else {
+                        a2.incFailedCounter();
+                        System.out.println("failed lock");
+                    }
+                } finally {
+                    a2.getLock().unlock();
                 }
 
             } else {
