@@ -4,6 +4,7 @@ public class User {
     private int id;
     private String name;
     private String surname;
+    private String phone;
 
     public int getId() {
         return id;
@@ -27,5 +28,13 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

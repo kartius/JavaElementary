@@ -48,7 +48,7 @@ public class DBconnectorMySQL {
                     "DEFAULT CHARACTER SET = utf8\n" +
                     "COLLATE = utf8_bin");
             statement.execute("CREATE TABLE IF NOT EXISTS `autoteller_machine`.`card` (\n" +
-                    "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
+                    "  `id` BIGINT(16) NOT NULL AUTO_INCREMENT,\n" +
                     "  `pin` SMALLINT(4) NULL DEFAULT NULL,\n" +
                     "  `type` VARCHAR(45) NULL DEFAULT NULL,\n" +
                     "  `hasChip` VARCHAR(45) NULL DEFAULT 'false',\n" +
@@ -62,7 +62,7 @@ public class DBconnectorMySQL {
                     "  `id` INT(11) NOT NULL,\n" +
                     "  `balance` DOUBLE NULL DEFAULT NULL,\n" +
                     "  `fk_id_user` INT(11) NULL DEFAULT NULL,\n" +
-                    "  `fk_id_card` INT(11) NULL DEFAULT NULL,\n" +
+                    "  `fk_id_card` BIGINT(16) NULL DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`id`),\n" +
                     "  INDEX `2_idx` (`fk_id_user` ASC),\n" +
                     "  INDEX `3_idx` (`fk_id_card` ASC),\n" +

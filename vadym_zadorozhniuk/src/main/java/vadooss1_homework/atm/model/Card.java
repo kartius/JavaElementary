@@ -1,28 +1,28 @@
 package vadooss1_homework.atm.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Card {
-    private int id;
-    private short pin;
+    private long id;
+    private int pin;
     private String type;
     private boolean hasChip;
     private Date dateTerm;
     private String lockReason;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public short getPin() {
+    public int getPin() {
         return pin;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void setPin(short pin) {
+    public void setPin(int pin) {
         this.pin = pin;
     }
 
@@ -34,7 +34,7 @@ public class Card {
         this.type = type;
     }
 
-    public boolean isHasChip() {
+    public boolean getHasChip() {
         return hasChip;
     }
 
