@@ -28,7 +28,9 @@ public class StudentRepositoryInDB implements StudentRepository {
             preparedStatement = connection.prepareStatement("SELECT id FROM `student` WHERE name = ?");
             preparedStatement.setString(1,student.name);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){student.id = resultSet.getInt("id");}
+            while(resultSet.next()){
+                student.id = resultSet.getInt("id");
+            }
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
