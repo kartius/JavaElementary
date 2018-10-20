@@ -9,6 +9,7 @@ public class Card {
     private boolean hasChip;
     private Date dateTerm;
     private String lockReason;
+    private int enterPin;
 
     public long getId() {
         return id;
@@ -56,5 +57,13 @@ public class Card {
 
     public void setLockReason(String lockReason) {
         this.lockReason = lockReason;
+    }
+
+    public int getEnterPin() {
+        return enterPin;
+    }
+
+    public void setEnterPin(int enterPin) {
+        this.enterPin = enterPin;
     }
 }

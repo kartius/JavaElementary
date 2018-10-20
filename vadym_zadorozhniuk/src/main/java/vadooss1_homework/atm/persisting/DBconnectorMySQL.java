@@ -43,6 +43,7 @@ public class DBconnectorMySQL {
                     "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                     "  `name` VARCHAR(45) NULL DEFAULT NULL,\n" +
                     "  `surname` VARCHAR(45) NULL DEFAULT NULL,\n" +
+                    "  `phone` VARCHAR(45) NULL DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`id`))\n" +
                     "ENGINE = InnoDB\n" +
                     "DEFAULT CHARACTER SET = utf8\n" +
@@ -53,13 +54,14 @@ public class DBconnectorMySQL {
                     "  `type` VARCHAR(45) NULL DEFAULT NULL,\n" +
                     "  `hasChip` VARCHAR(45) NULL DEFAULT 'false',\n" +
                     "  `dateTerm` DATE NULL DEFAULT NULL,\n" +
-                    "  `lockReason` VARCHAR(45) NULL DEFAULT NULL,\n" +
+                    "  `lockReason` VARCHAR(100) NULL DEFAULT 'absent',\n" +
+                    "  `enterPin` INT(11) NULL DEFAULT NULL,\n" +
                     "  PRIMARY KEY (`id`))\n" +
                     "ENGINE = InnoDB\n" +
                     "DEFAULT CHARACTER SET = utf8\n" +
                     "COLLATE = utf8_bin");
             statement.execute("CREATE TABLE IF NOT EXISTS `autoteller_machine`.`account` (\n" +
-                    "  `id` INT(11) NOT NULL,\n" +
+                    "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
                     "  `balance` DOUBLE NULL DEFAULT NULL,\n" +
                     "  `fk_id_user` INT(11) NULL DEFAULT NULL,\n" +
                     "  `fk_id_card` BIGINT(16) NULL DEFAULT NULL,\n" +
@@ -109,7 +111,7 @@ public class DBconnectorMySQL {
                     "COLLATE = utf8_bin");
             statement.execute("CREATE TABLE IF NOT EXISTS `autoteller_machine`.`transactions` (\n" +
                     "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-                    "  `date` DATETIME NULL DEFAULT NULL,\n" +
+                    "  `date` TIMESTAMP NULL DEFAULT NULL,\n" +
                     "  `successTrans` VARCHAR(45) NULL DEFAULT 'true',\n" +
                     "  `fk_id_user` INT(11) NULL DEFAULT NULL,\n" +
                     "  `fk_id_service` INT(11) NULL DEFAULT NULL,\n" +
@@ -129,11 +131,14 @@ public class DBconnectorMySQL {
                     "ENGINE = InnoDB\n" +
                     "DEFAULT CHARACTER SET = utf8\n" +
                     "COLLATE = utf8_bin");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('check card')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('check pin')");
             statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('get cash')");
             statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('transfer money')");
             statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance on screen')");
             statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance in SMS')");
             statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('balance print')");
+            statement.execute("INSERT INTO autoteller_machine.service (serviceKind) values ('return card')");
 
             statement.close();
         } catch (SQLException e) {

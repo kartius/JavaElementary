@@ -5,36 +5,44 @@ import vadooss1_homework.atm.controller.DTO;
 import vadooss1_homework.atm.model.ATM;
 import vadooss1_homework.atm.model.Account;
 import vadooss1_homework.atm.model.Card;
+import vadooss1_homework.atm.model.Transactions;
 import vadooss1_homework.atm.persisting.ATMserviceDB;
+import vadooss1_homework.atm.persisting.ATMserviceRepository;
 import vadooss1_homework.atm.persisting.DAO;
 import vadooss1_homework.atm.persisting.DBconnectorMySQL;
+import vadooss1_homework.atm.service.ServiceATM;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Runner {
     public static void main(String[] args) {
         DBconnectorMySQL dBconnectorMySQL = new DBconnectorMySQL();
         Connection connection = dBconnectorMySQL.getConnection();
+        //If you start the Runner at first time - remove comments:
         //dBconnectorMySQL.resetDB(connection);
-        DAO dao = new DAO();
+        //Then you must create objects instances in DB manually
         Gson json = new Gson();
         DTO dto = new DTO();
         dto.atmId = 1;
-        dto = null;
-        ATMserviceDB atMserviceDB = new ATMserviceDB();
-        Date date = new Date(2019, 10, 18);
+        dto.cardId = 1;
+        dto.cardType = "visa";
+        dto.cardHasChip = false;
+        dto.pinUserEnter = 1111;
+        dto.serviceKindId = 7;
+        dto.accountFromId = 1;
+        dto.accountOnId = 2;
+        dto.sumEnter = 100;
+        dto.OperationSuccess = false;
+        dto.message = "";
+        dto.returnCard = false;
 
-        //System.out.println(json.toJson(dao.getAccount(1)));
-        Card card = new Card();
-        card.setId(1);
-        card.setType("visa");
-        card.setHasChip(false);
-        card.setDateTerm(date);
-        ATM atm = new ATM();
-        Account ac = new Account();
-        System.out.println(atMserviceDB.checkPin(1111, card));
-        System.out.println(json.toJson(dto));
+        ServiceATM serviceATM = new ServiceATM(new ATMserviceDB(connection));
+
+        System.out.println(json.toJson(serviceATM.execute(dto)));
+        System.out.println(json.toJson(new DTO()));
+
+
 
 
 

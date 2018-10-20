@@ -10,8 +10,7 @@ public class DTO {
     public int accountFromId;
     public int accountOnId;
     public double sumEnter;
-    public boolean success;
-    public int countPinEnter;
-    public int trasactionId;
+    public boolean OperationSuccess;
     public String message;
+    public boolean returnCard;
 }
