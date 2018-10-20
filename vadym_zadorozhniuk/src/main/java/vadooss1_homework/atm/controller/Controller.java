@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 
-@WebServlet("/servlet")
+@WebServlet("/atm")
 public class Controller extends HttpServlet {
 
     final static Logger logger = Logger.getLogger(Controller.class);
