@@ -1,19 +1,13 @@
 package vadooss1_homework.atm;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import vadooss1_homework.atm.controller.DTO;
-import vadooss1_homework.atm.model.ATM;
-import vadooss1_homework.atm.model.Account;
-import vadooss1_homework.atm.model.Card;
-import vadooss1_homework.atm.model.Transactions;
 import vadooss1_homework.atm.persisting.ATMserviceDB;
-import vadooss1_homework.atm.persisting.ATMserviceRepository;
-import vadooss1_homework.atm.persisting.DAO;
 import vadooss1_homework.atm.persisting.DBconnectorMySQL;
 import vadooss1_homework.atm.service.ServiceATM;
 
 import java.sql.Connection;
-import java.sql.Timestamp;
 
 public class Runner {
     public static void main(String[] args) {
@@ -22,7 +16,7 @@ public class Runner {
         //If you start the Runner at first time - remove comments:
         //dBconnectorMySQL.resetDB(connection);
         //Then you must create objects instances in DB manually
-        Gson json = new Gson();
+        Gson json = new GsonBuilder().setPrettyPrinting().create();
         DTO dto = new DTO();
         dto.atmId = 1;
         dto.cardId = 1;

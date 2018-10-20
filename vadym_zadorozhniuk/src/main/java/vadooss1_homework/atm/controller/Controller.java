@@ -1,6 +1,7 @@
 package vadooss1_homework.atm.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.log4j.Logger;
 import vadooss1_homework.atm.persisting.ATMserviceDB;
 import vadooss1_homework.atm.persisting.DBconnectorMySQL;
@@ -21,7 +22,7 @@ public class Controller extends HttpServlet {
     DBconnectorMySQL dBconnectorMySQL = new DBconnectorMySQL();
     Connection connection = dBconnectorMySQL.getConnection();
     ServiceATM serviceATM = new ServiceATM(new ATMserviceDB(connection));
-    Gson json = new Gson();
+    Gson json = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,7 +40,6 @@ public class Controller extends HttpServlet {
             dto.OperationSuccess = false;
             dto.message = "";
             dto.returnCard = false;
-
             dto = serviceATM.execute(dto);
             resp.getWriter().println(json.toJson(dto));
         }catch (Exception e){
