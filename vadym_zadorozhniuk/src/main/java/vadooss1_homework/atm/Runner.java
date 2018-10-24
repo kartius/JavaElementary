@@ -13,7 +13,7 @@ public class Runner {
     public static void main(String[] args) {
         DBconnectorMySQL dBconnectorMySQL = new DBconnectorMySQL();
         Connection connection = dBconnectorMySQL.getConnection();
-        //If you start the Runner at first time - remove comments:
+        //If you start the Runner at first time - delete comments and execute a line:
         //dBconnectorMySQL.resetDB(connection);
         //Then you must create objects instances in DB manually
         Gson json = new GsonBuilder().setPrettyPrinting().create();
