@@ -1,4 +1,4 @@
-package vadooss1_homework.for_test;
+package vadooss1_homework.for_testing;
 
 public class TestingMethods {
     public int sumDigit(int number){
